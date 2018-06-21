@@ -1,0 +1,71 @@
+<!doctype html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
+                <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cuisines</button>
+                <div class="dropdown-menu" id="eatDrop" >
+                    <a class="dropdown-item" href="#"><span>Italian</span></a>
+                    <a class="dropdown-item" href="#"><span>Mexican</span></a>
+                    <a class="dropdown-item" href="#"><span>Chinese</span></a>
+                    <a class="dropdown-item" href="#"><span>American</span></a>
+                    <a class="dropdown-item" href="#"><span>Pizza</span></a>
+                    <a class="dropdown-item" href="#"><span>Burger</span></a>
+                    <a class="dropdown-item" href="#"><span>Japanese</span></a>
+                    <a class="dropdown-item" href="#"><span>Seafood</span></a>
+                    <a class="dropdown-item" href="#"><span>Vegetarian</span></a>
+                    <a class="dropdown-item" href="#"><span>Bar Food</span></a>
+                    <a class="dropdown-item" href="#"><span>BBQ</span></a>
+                    <a class="dropdown-item" href="#"><span>Indian</span></a>
+                </div>
+                </div>
+                <input type="text" class="form-control" id="quisineType" placeholder="Surprise Me" aria-label="Text input with dropdown button">
+            </div>
+            <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
+                <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cost</button>
+                <div class="dropdown-menu" id="priceDrop" >
+                    <a class="dropdown-item" href="#"><span>Cheap</span></a>
+                    <a class="dropdown-item" href="#"><span>Moderate</span></a>
+                    <a class="dropdown-item" href="#"><span>A Good Time</span></a>
+                    <a class="dropdown-item" href="#"><span>A REALLY Good Time</span></a>
+                </div>
+                </div>
+                <input class="form-control" id="priceType" placeholder="----" aria-label="Text input with dropdown button">
+            </div>
+            <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
+                <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Distance</button>
+                <div class="dropdown-menu" id="rangeDrop" >
+                    <a class="dropdown-item" href="#"><span>A few minutes away</span></a>
+                    <a class="dropdown-item" href="#"><span>A short drive</span></a>
+                    <a class="dropdown-item" href="#"><span>Somewhere in town</span></a>
+                    <a class="dropdown-item" href="#"><span>A half hour or more</span></a>
+                </div>
+                </div>
+                <input class="form-control" id="rangeType" placeholder="--" aria-label="Text input with dropdown button">
+            </div>
+            <button id="submit-button" class="btn btn-secondary" type="submit">Submit</button>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="restaurant-holder">
+
+            </div>
+        </div>
+    </div>    
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="./assets/javascript/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    
+</body>
