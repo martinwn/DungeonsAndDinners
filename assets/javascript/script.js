@@ -43,8 +43,8 @@ $("#submit-button").on("click", function() {
            convertedRange = 16000;
        } else if (range === "A half hour or more") {
            convertedRange = 80000;
-       }
-    }
+       };
+    };
 
     convertRange (range); console.log(convertedRange);
 
@@ -57,7 +57,7 @@ $("#submit-button").on("click", function() {
             convertedPrice = 3; 
         } else if (price === "A REALLY Good Time")
             convertedPrice = 4;
-    }
+    };
 
     convertPrice (price); console.log(convertedPrice);
 
@@ -103,12 +103,13 @@ $("#submit-button").on("click", function() {
 
         var queryZomatoUrl = "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude + "&radius=" + convertedRange + "&cuisines=" + convertedCuisine;
 
-
         $.ajax ({
             url: queryZomatoUrl,
             method: "GET",
             beforeSend: function(xhr){xhr.setRequestHeader("user-key", "86cbec6f776752992f95624705a3b128");}
         }) .then(function(response) {
+
+            matchingRestaurants.length = 0;
 
             for (i=0; i < response.restaurants.length; i++) {
                 
@@ -122,15 +123,50 @@ $("#submit-button").on("click", function() {
 
             function pickThreeLocations () {
 
-                for (i=0; i < 3; i++) {
+                threeRestaurantPicks.length = 0;
 
-                    threeRestaurantPicks.push(matchingRestaurants[Math.floor(Math.random() * matchingRestaurants.length)]);
-                    console.log(threeRestaurantPicks);
-                };
+                if (matchingRestaurants.length > 2) {
+
+                    for (i=0; threeRestaurantPicks.length < 3;) {
+
+                        var thingy = matchingRestaurants[Math.floor(Math.random() * matchingRestaurants.length)];
+
+                        console.log(thingy);
+
+                        if (threeRestaurantPicks.indexOf(thingy) === -1) {
+
+                            threeRestaurantPicks.push(thingy); 
+
+                        } 
+
+                        console.log(threeRestaurantPicks);
+
+                    };
+
+                } else if (matchingRestaurants.length === 2) {
+
+                    threeRestaurantPicks.push(matchingRestaurants[0]);
+
+                    threeRestaurantPicks.push(matchingRestaurants[1]);
+
+                } else if (matchingRestaurants.length === 1) {
+                    
+                    threeRestaurantPicks.push(matchingRestaurants[0]);
+
+                } else {
+
+                    var noResults = $("<div>").text("Sorry no matching results!");
+
+                    console.log("No results!")
+
+                }
                 
             };
 
             pickThreeLocations ();
+
+            
+            
         });
         
     }); 
