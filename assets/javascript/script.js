@@ -48,19 +48,6 @@ $("#submit-button").on("click", function() {
 
     convertRange (range); console.log(convertedRange);
 
-    function convertPrice (price) {
-        if (price === "Cheap") {
-            convertedPrice = 1;
-        } else if (price === "Moderate") {
-            convertedPrice = 2;
-        } else if (price === "A Good Time") {
-            convertedPrice = 3; 
-        } else if (price === "A REALLY Good Time")
-            convertedPrice = 4;
-    };
-
-    convertPrice (price); console.log(convertedPrice);
-
     function convertCuisine (cuisine) {
         if (cuisine === "Italian") {
             convertedCuisine = 55;
@@ -164,8 +151,6 @@ $("#submit-button").on("click", function() {
             };
 
             pickThreeLocations ();
-
-            
             
         });
         
