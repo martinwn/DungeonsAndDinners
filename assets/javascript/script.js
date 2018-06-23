@@ -29,7 +29,7 @@ $("#submit-button").on("click", function() {
     var convertedPrice = 0;
     var cuisine = $("#quisineType").val().trim();
     var convertedCuisine = 0;
-    var latitue = "";
+    var latitude = "";
     var longitude = "";
     var matchingRestaurants = [];
     var threeRestaurantPicks = [];
@@ -52,11 +52,11 @@ $("#submit-button").on("click", function() {
         if (price === "Cheap") {
             convertedPrice = 1;
         } else if (price === "Moderate") {
-            convertedPrice = 2;
+            convertedPrice = 45;
         } else if (price === "A Good Time") {
-            convertedPrice = 3; 
+            convertedPrice = 75; 
         } else if (price === "A REALLY Good Time")
-            convertedPrice = 4;
+            convertedPrice = 140;
     };
 
     convertPrice (price); console.log(convertedPrice);
@@ -110,12 +110,29 @@ $("#submit-button").on("click", function() {
         }) .then(function(response) {
 
             matchingRestaurants.length = 0;
+            
 
             for (i=0; i < response.restaurants.length; i++) {
                 
-                if (response.restaurants[i].restaurant.price_range === convertedPrice) {
-                    
-                    matchingRestaurants.push(response.restaurants[i]);  console.log(matchingRestaurants)
+                for (i=0; i < response.restaurants.length; i++) {
+                
+                    if (price === "Cheap" && response.restaurants[i].restaurant.average_cost_for_two < 31) {
+                        
+                        matchingRestaurants.push(response.restaurants[i]);  console.log(matchingRestaurants)
+
+                    } else if (price === "Moderate" && response.restaurants[i].restaurant.average_cost_for_two > 30 && response.restaurants[i].restaurant.average_cost_for_two < 61) {
+
+                        matchingRestaurants.push(response.restaurants[i]);  console.log(matchingRestaurants);
+
+                    } else if (price === "A Good Time" && response.restaurants[i].restaurant.average_cost_for_two > 60 && response.restaurants[i].restaurant.average_cost_for_two < 101) {
+
+                        matchingRestaurants.push(response.restaurants[i]);  console.log(matchingRestaurants);
+
+                    } else if (price === "A REALLY Good Time" && response.restaurants[i].restaurant.average_cost_for_two > 100) {
+
+                        matchingRestaurants.push(response.restaurants[i]);  console.log(matchingRestaurants);
+
+                    };
 
                 };
 
@@ -163,9 +180,7 @@ $("#submit-button").on("click", function() {
                 
             };
 
-            pickThreeLocations ();
-
-            
+            pickThreeLocations ();          
             
         });
         
