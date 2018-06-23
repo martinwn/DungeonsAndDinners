@@ -1,3 +1,120 @@
+var config = {
+    apiKey: "AIzaSyDIJxOczwNeRzwdUa96kJDtO0AQ48hX8m0",
+    authDomain: "dungeonsanddinners.firebaseapp.com",
+    databaseURL: "https://dungeonsanddinners.firebaseio.com",
+    projectId: "dungeonsanddinners",
+    storageBucket: "dungeonsanddinners.appspot.com",
+    messagingSenderId: "395732337799"
+  };
+
+firebase.initializeApp(config);
+
+var database = firebase.database();
+var provider = new firebase.auth.GoogleAuthProvider();
+
+$("#loginHere").on("click", function(event) {
+
+    console.log("login clicked");
+
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        console.log("user: " + user.name);
+        console.log("email: " + user.email);
+        // ...
+        console.log("userID: " + user.userid);
+        console.log("userToken: " + token);
+    }).catch(function(error) {
+
+        console.log("hitting error");
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        console.log("errorcode: " + errorCode + " errormessage: " + errorMessage + " email: " + email + " credential: " + credential);
+        // ...
+    });
+
+});
+
+$("#signOutButton").on("click", function(event) {
+
+console.log("signout clicked");
+
+firebase.auth().signOut().then(function() {
+    console.log("Signed-out"); //Sign-out successful.
+}).catch(function(error) {
+    console.log("Error trying to sign out"); // An error happened.
+});
+
+});
+
+firebase.auth().onAuthStateChanged(function(user) {
+if (user) {
+
+    var user = firebase.auth().currentUser;
+    var name, email, photoUrl, uid, emailVerified;
+    // photoUrl = "blank";
+
+    if (user != null) {
+
+        name = user.displayName;
+        email = user.email;
+        photoUrl = user.photoURL;
+        emailVerified = user.emailVerified;
+        uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+                        // this value to authenticate with your backend server, if
+                        // you have one. Use User.getToken() instead.
+        console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
+        var userRef = firebase.database().ref("users/" + uid)
+            
+            if (!userRef.firstLogin) {
+                 userRef.update({
+                    name: name,
+                    email: email,
+                    characterName: "PizzaEater",
+                    userid: uid,
+                    firstLogin: false,
+                    currentXP: 0,
+                    toNextLevel: 100,
+                    currentLevel: 1,
+                    currentClass: 'Trainee',
+                    lastLogin: '06062018',
+                    questTimer: 000000,
+                    characterWealth: "1",
+                    characterFortitude: "10",
+                    characterMind: "10",
+                    characterStrength: "10",
+                });
+            }
+
+
+        $('#userLoggedIn').show();
+        $('#signOutButton').show();
+        $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email);
+        $("#loginHere").hide();
+
+    }
+
+
+    // User is signed in.
+} else {
+
+        $("#loginHere").show();
+        $('#loggedInUser').html('');
+        $("#userLoggedIn").hide();
+        $("#signOutButton").hide();
+
+    // No user is signed in.
+}
+});
+
+
 $(document).on('click', '#eatDrop a', function() {
     var poodle = $(this).children('span').text();
     $('#quisineType').val(poodle);
@@ -19,7 +136,7 @@ $(document).on('click', '#rangeDrop a', function() {
     console.log($(this).children('span').text());
 });
 
-$("#submit-button").on("click", function() {
+$("#findMeAPlace").on("click", function() {
 
     event.preventDefault();
 
@@ -33,6 +150,7 @@ $("#submit-button").on("click", function() {
     var longitude = "";
     var matchingRestaurants = [];
     var threeRestaurantPicks = [];
+    var oneRestaurantPick = [];
 
     function convertRange (range) {
        if (range === "A few minutes away") {
@@ -47,19 +165,6 @@ $("#submit-button").on("click", function() {
     };
 
     convertRange (range); console.log(convertedRange);
-
-    function convertPrice (price) {
-        if (price === "Cheap") {
-            convertedPrice = 1;
-        } else if (price === "Moderate") {
-            convertedPrice = 45;
-        } else if (price === "A Good Time") {
-            convertedPrice = 75; 
-        } else if (price === "A REALLY Good Time")
-            convertedPrice = 140;
-    };
-
-    convertPrice (price); console.log(convertedPrice);
 
     function convertCuisine (cuisine) {
         if (cuisine === "Italian") {
@@ -146,11 +251,14 @@ $("#submit-button").on("click", function() {
 
                     for (i=0; threeRestaurantPicks.length < 3;) {
 
+                        
                         var thingy = matchingRestaurants[Math.floor(Math.random() * matchingRestaurants.length)];
 
                         console.log(thingy);
 
                         if (threeRestaurantPicks.indexOf(thingy) === -1) {
+
+                            $("#noResults").hide();
 
                             threeRestaurantPicks.push(thingy); 
 
@@ -162,17 +270,21 @@ $("#submit-button").on("click", function() {
 
                 } else if (matchingRestaurants.length === 2) {
 
+                    $("#noResults").hide();
+
                     threeRestaurantPicks.push(matchingRestaurants[0]);
 
                     threeRestaurantPicks.push(matchingRestaurants[1]);
 
                 } else if (matchingRestaurants.length === 1) {
+
+                    $("#noResults").hide();
                     
                     threeRestaurantPicks.push(matchingRestaurants[0]);
 
                 } else {
 
-                    var noResults = $("<div>").text("Sorry no matching results!");
+                    $("#noResults").show();
 
                     console.log("No results!")
 
@@ -180,7 +292,61 @@ $("#submit-button").on("click", function() {
                 
             };
 
-            pickThreeLocations ();          
+            pickThreeLocations ();    
+            
+            if (threeRestaurantPicks.length > 0) {
+
+                function pickOneLocation () {
+
+                    oneRestaurantPick.length = 0;
+
+                    var thingy2 = threeRestaurantPicks[Math.floor(Math.random() * pickThreeLocations.length)];
+    
+                    oneRestaurantPick.push(thingy2);
+    
+                };
+    
+            };
+
+            pickOneLocation (); console.log(oneRestaurantPick);
+
+            function writeRestaurantToCard (oneRestaurantPick) {
+
+                $("#mainRestaurantName").text(oneRestaurantPick[0].restaurant.name);
+
+                $("#mainAddress").text(oneRestaurantPick[0].restaurant.location.address);
+
+                $("#mainCuisineType").text(oneRestaurantPick[0].restaurant.cuisines);
+
+                if (price === "Cheap") {
+                    
+                    $("#mainPriceResult").text("$")
+
+                } else if (price === "Moderate") {
+                    
+                    $("#mainPriceResult").text("$$")
+
+                } else if (price === "A Good Time") {
+                    
+                    $("#mainPriceResult").text("$$$")
+
+                } else if (price === "A REALLY Good Time") {
+                    
+                    $("#mainPriceResult").text("$$$$")
+
+                } 
+
+                // console.log(oneRestaurantPick[0].restaurant.thumb)
+
+                // $("#mainVenuePic").attr("src", oneRestaurantPick[0].restaurant.photos_url);
+
+                $("#linkMenu").attr("href", oneRestaurantPick[0].restaurant.menu_url);
+
+                $("#favorite").attr("dataValue", oneRestaurantPick[0].restaurant.id)
+
+            };
+            
+            writeRestaurantToCard (oneRestaurantPick);
             
         });
         
