@@ -1,71 +1,195 @@
 <!doctype html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    
     
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="row">
-            <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
-                <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cuisines</button>
-                <div class="dropdown-menu" id="eatDrop" >
-                    <a class="dropdown-item" href="#"><span>Italian</span></a>
-                    <a class="dropdown-item" href="#"><span>Mexican</span></a>
-                    <a class="dropdown-item" href="#"><span>Chinese</span></a>
-                    <a class="dropdown-item" href="#"><span>American</span></a>
-                    <a class="dropdown-item" href="#"><span>Pizza</span></a>
-                    <a class="dropdown-item" href="#"><span>Burger</span></a>
-                    <a class="dropdown-item" href="#"><span>Japanese</span></a>
-                    <a class="dropdown-item" href="#"><span>Seafood</span></a>
-                    <a class="dropdown-item" href="#"><span>Vegetarian</span></a>
-                    <a class="dropdown-item" href="#"><span>Bar Food</span></a>
-                    <a class="dropdown-item" href="#"><span>BBQ</span></a>
-                    <a class="dropdown-item" href="#"><span>Indian</span></a>
-                </div>
-                </div>
-                <input type="text" class="form-control" id="quisineType" placeholder="Surprise Me" aria-label="Text input with dropdown button">
-            </div>
-            <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
-                <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cost</button>
-                <div class="dropdown-menu" id="priceDrop" >
-                    <a class="dropdown-item" href="#"><span>Cheap</span></a>
-                    <a class="dropdown-item" href="#"><span>Moderate</span></a>
-                    <a class="dropdown-item" href="#"><span>A Good Time</span></a>
-                    <a class="dropdown-item" href="#"><span>A REALLY Good Time</span></a>
-                </div>
-                </div>
-                <input class="form-control" id="priceType" placeholder="----" aria-label="Text input with dropdown button">
-            </div>
-            <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
-                <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Distance</button>
-                <div class="dropdown-menu" id="rangeDrop" >
-                    <a class="dropdown-item" href="#"><span>A few minutes away</span></a>
-                    <a class="dropdown-item" href="#"><span>A short drive</span></a>
-                    <a class="dropdown-item" href="#"><span>Somewhere in town</span></a>
-                    <a class="dropdown-item" href="#"><span>A half hour or more</span></a>
-                </div>
-                </div>
-                <input class="form-control" id="rangeType" placeholder="--" aria-label="Text input with dropdown button">
-            </div>
-            <button id="submit-button" class="btn btn-secondary" type="submit">Submit</button>
-        </div>
-        <div class="row">
-            <div class="col-md-12" id="restaurant-holder">
+    <style>
+        #userLoggedIn {
+            display: none;
+        }
+    
+        .jumbotron-fluid{
+            min-width: 100%;
+        }
+    
+        #signOutButton {
+            display: none;
+        }
+    
+        #findMeAPlace {
+            margin-top: 15px;
+            margin-left: auto;
+            margin-right: auto;
+            min-width: 70%;
+            text-align: center;
+            background-color:lightgrey;
+            padding-top:15px;
+            padding-bottom:15px;
+            font-size: 2rem;
+            border-radius: 5px;
+        }
 
-            </div>
-        </div>
-    </div>    
+        #noResults {
+            display: none
+        }
+
+        #noResultsBox {
+            margin-top: 15px;
+            margin-left: auto;
+            margin-right: auto;
+            min-width: 70%;
+            text-align: center;
+            background-color:lightgrey;
+            padding-top:15px;
+            padding-bottom:15px;
+            font-size: 2rem;
+            border-radius: 5px;
+        }
+    
+        #3x {
+            size: 300%;
+        }
+    
+        #5x {
+            size: 500%;
+        }
+    
+        #2x {
+            size: 200%;
+        }
+    
+        #mainVenuePic {
+            height: 200px;
+            width: 300px;
+            background: gray;
+        }
+    
+        #favorite {
+            opacity: .8;
+        }
+    
+        #mainRestaurantName {
+            margin-bottom: -4px!important;
+        }
+    
+        .card {
+            margin-bottom: 10px!important;
+        }
+    
+    </style>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">   </a>              
+                    <div class="navbar-nav navbar-right ml-auto justify-content-end" id="navbarSupportedContent">
+                      <ul class="navbar-nav navbar-right">
+                        <li class="nav-item active">
+                            <a class="nav-link ml-auto" id="loginHere" href="#"><i class="fas fa-user-plus"></i> Login<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item" id="userLoggedIn">
+                            <a class="nav-link" id="loggedInUser" href="#"><i class="fas fa-user-circle"></i>Logged In User</a>
+                        </li>
+                        <li class="nav-item" id="signOutButton">
+                            <a class="nav-link" href="#">(sign out)<i class="fas fa-sign-out-alt"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                </nav>
+                <div class="container">
+                    <div class="row">
+                        <div class="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <h1 class="display-4">Dungeons and Dinners</h1>
+                                <p class="lead">Slay indecisive dining, find local food you haven't tried.</p>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                                <div class="input-group mb-4 col-lg-4 col-md-6 col-xs-12">
+                                    <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cuisines</button>
+                                    <div class="dropdown-menu" id="eatDrop" >
+                                        <a class="dropdown-item" href="#"><span>Italian</span></a>
+                                        <a class="dropdown-item" href="#"><span>Mexican</span></a>
+                                        <a class="dropdown-item" href="#"><span>Chinese</span></a>
+                                        <a class="dropdown-item" href="#"><span>American</span></a>
+                                        <a class="dropdown-item" href="#"><span>Pizza</span></a>
+                                        <a class="dropdown-item" href="#"><span>Burgers</span></a>
+                                        <a class="dropdown-item" href="#"><span>Japanese</span></a>
+                                        <a class="dropdown-item" href="#"><span>Seafood</span></a>
+                                        <a class="dropdown-item" href="#"><span>Vegetarian</span></a>
+                                        <a class="dropdown-item" href="#"><span>Bar</span></a>
+                                        <a class="dropdown-item" href="#"><span>BBQ</span></a>
+                                        <a class="dropdown-item" href="#"><span>Indian</span></a>
+                                    </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="quisineType" placeholder="Surprise Me" aria-label="Text input with dropdown button">
+                                </div>
+                                <div class="input-group mb-4 col-lg-4 col-md-6 col-xs-12">
+                                    <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cost</button>
+                                    <div class="dropdown-menu" id="priceDrop" >
+                                        <a class="dropdown-item" href="#"><span>Cheap</span></a>
+                                        <a class="dropdown-item" href="#"><span>Moderate</span></a>
+                                        <a class="dropdown-item" href="#"><span>A Good Time</span></a>
+                                        <a class="dropdown-item" href="#"><span>A REALLY Good Time</span></a>
+                                    </div>
+                                    </div>
+                                    <input class="form-control" id="priceType" placeholder="----" aria-label="Text input with dropdown button">
+                                </div>
+                                <div class="input-group mb-4 col-lg-4 col-md-6 col-xs-12">
+                                    <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Distance</button>
+                                    <div class="dropdown-menu" id="rangeDrop" >
+                                        <a class="dropdown-item" href="#"><span>A few minutes away</span></a>
+                                        <a class="dropdown-item" href="#"><span>A short drive</span></a>
+                                        <a class="dropdown-item" href="#"><span>Somewhere in town</span></a>
+                                        <a class="dropdown-item" href="#"><span>A half hour or more</span></a>
+                                    </div>
+                                    </div>
+                                    <input class="form-control" id="rangeType" placeholder="--" aria-label="Text input with dropdown button">
+                                </div>
+                            </div>
+                    <div class="row">
+                        <div id="findMeAPlace">Find me a place to eat! <i id="3x" class="fas fa-dice"></i></div>
+                    </div>
+                    <br>
+                    <div class="row" id="noResults">
+                            <div id="noResultsBox">No Results found for that Input!</div>
+                    </div>
+                    <br>    
+                    <div class="row d-flex justify-content-center" id="mainRandomResult">
+                        <div class="w-75 card">
+                            <div class="card-header text-right">
+                                <span class="text-right"></span><i class="fas fa-star" id="favorite" dataValue="restaurantID"></i></div>
+                            <div class="card-body">
+                                <h5 class="card-title" id="mainRestaurantName">Restaurant Name</h5>
+                                <small class="text-muted" id="mainAddress">1000 W. Broad Street, Richmond VA 23220</small> • <small class="text-muted" id="mainCuisineType">Italian, BBQ</small> • <small class="text-muted" id="mainPriceResult">$$$</small>
+                                <br><img id="mainVenuePic" src="">
+                            </div>
+                            <div class="card-footer text-right">
+                                
+                                <a id="linkMenu" href="#"><small class="btn btn-warning">Get Menu <span class="ml-auto"><i class="fas fa-map"></i></small></a>
+                                <a id="linkDirections" href="#"><small id="getDirections" class="btn btn-primary">Get Directions <span class="ml-auto"><i class="fas fa-map-marker-alt"></i></small></a>
+                                <small id="Reroll" class="btn btn-info">Reroll <span class="ml-auto"><i class="fas fa-dice"></i></small></span>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>    
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="./assets/javascript/script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    
+<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+<script src="./assets/javascript/script.js"></script>
+
 </body>
