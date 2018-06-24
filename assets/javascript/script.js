@@ -105,7 +105,7 @@ if (user) {
                     lastLogin: '06062018',
                     questTimer: 000000,
                     characterWealth: "1",
-                    favoritesList: []
+                    favoritesListDB: []
                 });
             }
 
@@ -463,7 +463,7 @@ $(document).on("click", "#favorite", function() {
             favoritesLocal = deleteFavorites;
         
             globalUID.update({
-                favoritesList: favoritesObj,
+                favoritesListDB: favoritesObj,
             });
 
             //displayFavorites(); //this should only go off if favoritesShowing === true
@@ -486,7 +486,7 @@ $(globalUID).on("value", function(snapshot) {
 
     console.log("hitting DB listener for favorites");
 
-    favoritesLocal == snapshot.val().favoritesList;
+    favoritesLocal == snapshot.val().favoritesListDB;
     console.log("favoriteslocal changed by database to: " + favoritesLocal);
 
 
