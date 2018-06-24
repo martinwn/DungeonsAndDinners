@@ -16,7 +16,7 @@ var provider = new firebase.auth.GoogleAuthProvider();
 var globalUID = ""; 
 var userLoggedIn = false;
 var favoritesShowing = false;
-var favoritesLocal = {}; 
+var favoritesLocal = []; 
 
 $("#loginHere").on("click", function(event) {
 
@@ -88,8 +88,10 @@ if (user) {
         console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
         var userRef = firebase.database().ref("users/" + uid);
         globalUID = userRef;
+        console.log("globalUID" + globalUID);
             
             if (!userRef.firstLogin) {
+                console.log("First Login");
                  userRef.update({
                     name: name,
                     email: email,
@@ -103,9 +105,7 @@ if (user) {
                     lastLogin: '06062018',
                     questTimer: 000000,
                     characterWealth: "1",
-                    characterFortitude: "10",
-                    characterMind: "10",
-                    characterStrength: "10",
+                    favoritesList: []
                 });
             }
 
@@ -439,7 +439,12 @@ $(document).on("click", "#favorite", function() {
 
             console.log('FavoritesOBJ: ' + favoritesObj);
 
+            console.log("favoritesLocal: " + favoritesLocal);
+
             favoritesLocal.push(favoritesObj);
+
+            console.log("favoritesLocal after push: " + favoritesLocal);
+
 
 
             globalUID.update({
