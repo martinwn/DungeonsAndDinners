@@ -550,15 +550,20 @@ $(document).on("click", "#favorite", function() {
             $(this).attr("dataIndex", favIndex);
             
         } else {
-
+            console.log ("trying to remove favorite");
+            
             $(this).removeClass("favorited");
             
             var deleteFavorites = favoritesLocal;
             var currentIndex = $(this).attr("dataIndex");
 
+            console.log("current index: " + currentIndex);
+
             // Deletes the item marked for deletion
             deleteFavorites.splice(currentIndex, 1);
             favoritesLocal = deleteFavorites;
+
+            console.log("favorites after removal: " + favoritesLocal);
         
             globalUID.update({
                 favoritesListDB: favoritesObj,
