@@ -393,7 +393,7 @@ $(document).on("click", "#favorite", function() {
             var favMenu = $(this).attr("dataMenu");
             var favPrice = $(this).attr("dataPrice");
 
-            var favIndex = favorites.length;
+            var favIndex = favoritesLocal.length;
             
 
             
