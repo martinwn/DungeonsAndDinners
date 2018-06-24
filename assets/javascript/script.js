@@ -417,6 +417,7 @@ $(document).on("click", "#favorite", function() {
             });
             
             $(this).attr("dataIndex", favIndex);
+            
         } else {
 
             var deleteFavorites = favoritesLocal;

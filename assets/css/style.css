@@ -120,7 +120,7 @@ body {
     opacity: .8;
 }
 
-#favorited {
+.favorited {
     opacity: 1;
     color: orange;
     stroke-width: 1px;
