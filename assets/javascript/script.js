@@ -159,8 +159,8 @@ $("#findMeAPlace").on("click", function() {
     var range = $("#rangeType").val().trim(); 
     var convertedRange = 0;
     var cuisineList = ["Italian", "Mexican", "Chinese", "American", "Pizza", "Burgers", "Japanese", "Seafood", "Vegetarian", "Bar", "BBQ", "Indian"]
-    var cuisine = $("#quisineType").val().trim();
-    var cuisineEmpty = "";
+    var cuisine = $("#quisineType").val().trim(); console.log(cuisine);
+    var cuisineEmpty = false;
     var convertedCuisine = 0;
     var price = $("#priceType").val().trim(); 
     var latitude = "";
@@ -184,35 +184,130 @@ $("#findMeAPlace").on("click", function() {
     convertRange (range); 
 
     function convertCuisine (cuisine) {
-      
-        if (cuisine === "") {
-            cuisineEmpty = cuisineList[Math.floor(Math.random() * cuisineList.length)];
-        } else if (cuisine === "Italian") {
-            convertedCuisine = 55;
-        } else if (cuisine === "Mexican") {
+        
+        console.log(cuisine);
+
+        switch (cuisine) {
+
+            case "Italian": 
+            convertCuisine = 55;
+            $("#currentCuisine").text(cuisine);
+            break;  
+
+            case "Mexican": 
             convertedCuisine = 73;
-        } else if (cuisine === "Chinese") {
-            convertedCuisine = 25;
-        } else if (cuisine === "American") {
+            $("#currentCuisine").text(cuisine);
+            break;
+
+            case "American":
             convertedCuisine = 1;
-        } else if (cuisine === "Pizza") {
+            $("#currentCuisine").text(cuisine);
+            break;
+
+            case "Pizza":
             convertedCuisine = 82;
-        } else if (cuisine === "Burger") {
+            $("#currentCuisine").text(cuisine)
+            break;
+            
+            case "Burger":
             convertedCuisine = 168;
-        } else if (cuisine === "Japanese") {
+            $("#currentCuisine").text(cuisine);
+            break;
+
+            case "Japanese":
             convertedCuisine = 60;
-        } else if (cuisine === "Seafood") {
+            $("#currentCuisine").text(cuisine);
+            break;
+
+            case "Seafood":
             convertedCuisine = 83;
-        } else if (cuisine === "Vegetarian") {
-            convertedCuisine = 308;   
-        } else if (cuisine === "Bar Food") {
+            $("#currentCuisine").text(cuisine);
+            break;
+
+            case "Vegetarian":
+            convertedCuisine = 308;  
+            $("#currentCuisine").text(cuisine); 
+            break;
+
+            case "Bar":
             convertedCuisine = 227;
-        } else if (cuisine = "BBQ") {
+            $("#currentCuisine").text(cuisine);
+            break;
+
+            case "BBQ":
             convertedCuisine = 193;
-        } else if (cuisine = "Indian") {
+            $("#currentCuisine").text(cuisine);
+            break;
+
+            case "Indian":
             convertedCuisine = 148;
+            $("#currentCuisine").text(cuisine);
+            break;
+
+            case "":
+            cuisine = cuisineList[Math.floor(Math.random() * cuisineList.length)]; console.log(cuisine);
+            switch (cuisine) {
+
+                case "Italian": 
+                convertedCuisine = 55;
+                $("#currentCuisine").text(cuisine);
+                break;  
+        
+                case "Mexican": 
+                convertedCuisine = 73;
+                $("#currentCuisine").text(cuisine);
+                break;
+        
+                case "American":
+                convertedCuisine = 1;
+                $("#currentCuisine").text(cuisine);
+                break;
+        
+                case "Pizza":
+                convertedCuisine = 82;
+                $("#currentCuisine").text(cuisine)
+                break;
+                
+                case "Burger":
+                convertedCuisine = 168;
+                $("#currentCuisine").text(cuisine);
+                break;
+        
+                case "Japanese":
+                convertedCuisine = 60;
+                $("#currentCuisine").text(cuisine);
+                break;
+        
+                case "Seafood":
+                convertedCuisine = 83;
+                $("#currentCuisine").text(cuisine);
+                break;
+        
+                case "Vegetarian":
+                convertedCuisine = 308;  
+                $("#currentCuisine").text(cuisine); 
+                break;
+        
+                case "Bar":
+                convertedCuisine = 227;
+                $("#currentCuisine").text(cuisine);
+                break;
+        
+                case "BBQ":
+                convertedCuisine = 193;
+                $("#currentCuisine").text(cuisine);
+                break;
+        
+                case "Indian":
+                convertedCuisine = 148;
+                $("#currentCuisine").text(cuisine);
+                break;
+            };
+
         };
+    
     };
+
 
     convertCuisine (cuisine); console.log (convertedCuisine);
 
@@ -222,9 +317,9 @@ $("#findMeAPlace").on("click", function() {
         
         $("#noResults").show();
 
-    } else {
+        $("#currentCuisine").text("");
 
-    
+    } else {
 
     var queryGoogleUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBClQb1B-kxEPNM2zmAfCB2OcwWXawrHEw";
     
@@ -250,20 +345,19 @@ $("#findMeAPlace").on("click", function() {
                 
                     if (price === "Cheap" && response.restaurants[i].restaurant.average_cost_for_two < 31) {
                         
-                        matchingRestaurants.push(response.restaurants[i]);  console.log(matchingRestaurants)
+                        matchingRestaurants.push(response.restaurants[i]);  
 
                     } else if (price === "Moderate" && response.restaurants[i].restaurant.average_cost_for_two > 30 && response.restaurants[i].restaurant.average_cost_for_two < 61) {
 
-                        matchingRestaurants.push(response.restaurants[i]);  console.log(matchingRestaurants);
+                        matchingRestaurants.push(response.restaurants[i]);  
 
                     } else if (price === "A Good Time" && response.restaurants[i].restaurant.average_cost_for_two > 60 && response.restaurants[i].restaurant.average_cost_for_two < 101) {
 
-                        matchingRestaurants.push(response.restaurants[i]);  console.log(matchingRestaurants);
+                        matchingRestaurants.push(response.restaurants[i]);  
 
                     } else if (price === "A REALLY Good Time" && response.restaurants[i].restaurant.average_cost_for_two > 100) {
 
-                        matchingRestaurants.push(response.restaurants[i]);  console.log(matchingRestaurants);
-
+                        matchingRestaurants.push(response.restaurants[i]); 
                     };
 
                 };
@@ -278,8 +372,6 @@ $("#findMeAPlace").on("click", function() {
 
                         var thingy = matchingRestaurants[Math.floor(Math.random() * matchingRestaurants.length)];
 
-                        console.log(thingy);
-
                         if (threeRestaurantPicks.indexOf(thingy) === -1) {
 
                             $("#noResults").hide();
@@ -287,8 +379,6 @@ $("#findMeAPlace").on("click", function() {
                             threeRestaurantPicks.push(thingy); 
 
                         }; 
-
-                        console.log(threeRestaurantPicks);
 
                     };
 
@@ -323,8 +413,6 @@ $("#findMeAPlace").on("click", function() {
             if (threeRestaurantPicks.length > 0) {
 
                 function pickOneLocation () {
-
-                    $("#currentCuisine").text(cuisine); 
 
                     oneRestaurantPick.length = 0;
 
@@ -379,12 +467,17 @@ $("#findMeAPlace").on("click", function() {
                 $("#favorite").attr("dataValue", oneRestaurantPick[0].restaurant.id);
 
                 $(document).on("click", "#reroll", function() {
-
+                    
                     pickThreeLocations ();
                     pickOneLocation ();
                     writeRestaurantToCard (oneRestaurantPick);
+                    
 
                 });
+
+                var googleUrl = "https://www.google.com/maps/search/?api=1&query=" + oneRestaurantPick[0].restaurant.location.latitude + "," + oneRestaurantPick[0].restaurant.location.longitude;
+
+                $("#linkDirections").attr("href", googleUrl);
               
                 //adding all of these for favorites use
 
