@@ -481,7 +481,8 @@ $(document).on("click", "#favorite", function() {
 
 //database listener for favorites list
 
-globalUID.on("value", function(snapshot) { 
+
+$(globalUID).on("value", function(snapshot) { 
 
     console.log("hitting DB listener for favorites");
 
