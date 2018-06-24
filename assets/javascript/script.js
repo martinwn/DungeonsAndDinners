@@ -169,6 +169,9 @@ $("#findMeAPlace").on("click", function() {
     var threeRestaurantPicks = [];
     var oneRestaurantPick = [];
 
+    $('#favorite').removeClass('.favorited');
+    
+
     function convertRange (range) {
        if (range === "A few minutes away") {
            convertedRange = 3000;
@@ -404,7 +407,7 @@ $("#findMeAPlace").on("click", function() {
 
                     console.log("No results!")
 
-                }
+                };
                 
             };
 
@@ -458,7 +461,7 @@ $("#findMeAPlace").on("click", function() {
 
                 } 
 
-                // $("#mainVenuePic").attr("src", oneRestaurantPick[0].restaurant.photos_url);
+                // $("#mainVenuePic").attr("src", oneRestaurantPick[0].restaurant.featured_image);
 
                 // $("#phoneNumber").attr("href", "tel:+" + oneRestaurantPick[0].restaurant.phone_numbers)
 
@@ -467,12 +470,14 @@ $("#findMeAPlace").on("click", function() {
                 $("#favorite").attr("dataValue", oneRestaurantPick[0].restaurant.id);
 
                 $(document).on("click", "#reroll", function() {
-                    
+
+
                     pickThreeLocations ();
                     pickOneLocation ();
                     writeRestaurantToCard (oneRestaurantPick);
-                    
+                    $('#favorite').removeClass('.favorited');
 
+                    
                 });
 
                 var googleUrl = "https://www.google.com/maps/search/?api=1&query=" + oneRestaurantPick[0].restaurant.location.latitude + "," + oneRestaurantPick[0].restaurant.location.longitude;
@@ -486,8 +491,6 @@ $("#findMeAPlace").on("click", function() {
                 $("#favorite").attr("dataAddress", oneRestaurantPick[0].restaurant.location.address);
                 $("#favorite").attr("dataCuisine", oneRestaurantPick[0].restaurant.cuisines);
                 $("#favorite").attr("dataMenu", oneRestaurantPick[0].restaurant.menu_url);
-            
-
 
             };
             
