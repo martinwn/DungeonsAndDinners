@@ -97,7 +97,7 @@ if (user) {
                     email: email,
                     characterName: "PizzaEater",
                     userid: uid,
-                    firstLogin: false,
+                    firstLogin: true,
                     currentXP: 0,
                     toNextLevel: 100,
                     currentLevel: 1,
