@@ -95,17 +95,8 @@ if (user) {
                  userRef.update({
                     name: name,
                     email: email,
-                    characterName: "PizzaEater",
                     userid: uid,
                     firstLogin: true,
-                    currentXP: 0,
-                    toNextLevel: 100,
-                    currentLevel: 1,
-                    currentClass: 'Trainee',
-                    lastLogin: '06062018',
-                    questTimer: 000000,
-                    characterWealth: "1",
-                    favoritesListDB: []
                 });
             }
 
@@ -563,10 +554,13 @@ $(document).on("click", "#favorite", function() {
             deleteFavorites.splice(currentIndex, 1);
             favoritesLocal = deleteFavorites;
 
-            console.log("favorites after removal: " + favoritesLocal);
+
+
+
+            console.log("favorites after removal: " + favoritesLocal); 
         
             globalUID.update({
-                favoritesListDB: favoritesObj,
+                favoritesListDB: favoritesLocal,
             });
 
             
@@ -592,6 +586,12 @@ $(globalUID).on("value", function(snapshot) {
     console.log("hitting DB listener for favorites");
 
     favoritesLocal == snapshot.val().favoritesListDB;
+
+    // JSON.parse(favoritesLocal);
+
+    // if (!Array.isArray(favoritesLocal)) {
+    //     favoritesLocal = [];
+    // }
     console.log("favoriteslocal changed by database to: " + favoritesLocal);
 
 
