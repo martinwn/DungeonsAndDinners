@@ -169,8 +169,8 @@ $("#findMeAPlace").on("click", function() {
     var threeRestaurantPicks = [];
     var oneRestaurantPick = [];
 
-    $('#favorite').removeClass('.favorited');
-    
+    $('#favorite').removeClass('favorited');
+
 
     function convertRange (range) {
        if (range === "A few minutes away") {
@@ -475,7 +475,7 @@ $("#findMeAPlace").on("click", function() {
                     pickThreeLocations ();
                     pickOneLocation ();
                     writeRestaurantToCard (oneRestaurantPick);
-                    $('#favorite').removeClass('.favorited');
+                    $('#favorite').removeClass('favorited');
 
                     
                 });
