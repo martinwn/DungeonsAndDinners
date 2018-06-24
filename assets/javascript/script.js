@@ -68,9 +68,13 @@ if (user) {
 
     var user = firebase.auth().currentUser;
     var name, email, photoUrl, uid, emailVerified;
+
+    console.log("seeing user");
     // photoUrl = "blank";
 
     if (user != null) {
+
+        console.log("seeing user variables");
 
         userLoggedIn = true; //favorite toggler
 
@@ -83,7 +87,7 @@ if (user) {
                         // you have one. Use User.getToken() instead.
         console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
         var userRef = firebase.database().ref("users/" + uid);
-        globalUID = firebase.database().ref("users/" + uid + "/favorites");
+        globalUID = userRef;
             
             if (!userRef.firstLogin) {
                  userRef.update({
