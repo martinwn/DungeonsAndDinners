@@ -55,6 +55,7 @@ firebase.auth().signOut().then(function() {
 });
 
 firebase.auth().onAuthStateChanged(function(user) {
+
 if (user) {
 
     var user = firebase.auth().currentUser;
@@ -140,12 +141,13 @@ $("#findMeAPlace").on("click", function() {
 
     event.preventDefault();
 
-    var range = $("#rangeType").val().trim(); console.log(range);
+    var range = $("#rangeType").val().trim(); 
     var convertedRange = 0;
-    var price = $("#priceType").val().trim();
-    var convertedPrice = 0;
+    var cuisineList = ["Italian", "Mexican", "Chinese", "American", "Pizza", "Burgers", "Japanese", "Seafood", "Vegetarian", "Bar", "BBQ", "Indian"]
     var cuisine = $("#quisineType").val().trim();
+    var cuisineEmpty = "";
     var convertedCuisine = 0;
+    var price = $("#priceType").val().trim(); 
     var latitude = "";
     var longitude = "";
     var matchingRestaurants = [];
@@ -164,10 +166,13 @@ $("#findMeAPlace").on("click", function() {
        };
     };
 
-    convertRange (range); console.log(convertedRange);
+    convertRange (range); 
 
     function convertCuisine (cuisine) {
-        if (cuisine === "Italian") {
+      
+        if (cuisine === "") {
+            cuisineEmpty = cuisineList[Math.floor(Math.random() * cuisineList.length)];
+        } else if (cuisine === "Italian") {
             convertedCuisine = 55;
         } else if (cuisine === "Mexican") {
             convertedCuisine = 73;
@@ -177,7 +182,7 @@ $("#findMeAPlace").on("click", function() {
             convertedCuisine = 1;
         } else if (cuisine === "Pizza") {
             convertedCuisine = 82;
-        }   else if (cuisine === "Burger") {
+        } else if (cuisine === "Burger") {
             convertedCuisine = 168;
         } else if (cuisine === "Japanese") {
             convertedCuisine = 60;
@@ -195,6 +200,16 @@ $("#findMeAPlace").on("click", function() {
     };
 
     convertCuisine (cuisine); console.log (convertedCuisine);
+
+    if (convertedRange === 0 || price === "") {
+        
+        $("#noResultsBox").text("Please enter a value for Cost and Distance")
+        
+        $("#noResults").show();
+
+    } else {
+
+    
 
     var queryGoogleUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBClQb1B-kxEPNM2zmAfCB2OcwWXawrHEw";
     
@@ -215,9 +230,6 @@ $("#findMeAPlace").on("click", function() {
         }) .then(function(response) {
 
             matchingRestaurants.length = 0;
-            
-
-            for (i=0; i < response.restaurants.length; i++) {
                 
                 for (i=0; i < response.restaurants.length; i++) {
                 
@@ -241,8 +253,6 @@ $("#findMeAPlace").on("click", function() {
 
                 };
 
-            };
-
             function pickThreeLocations () {
 
                 threeRestaurantPicks.length = 0;
@@ -251,7 +261,6 @@ $("#findMeAPlace").on("click", function() {
 
                     for (i=0; threeRestaurantPicks.length < 3;) {
 
-                        
                         var thingy = matchingRestaurants[Math.floor(Math.random() * matchingRestaurants.length)];
 
                         console.log(thingy);
@@ -262,7 +271,7 @@ $("#findMeAPlace").on("click", function() {
 
                             threeRestaurantPicks.push(thingy); 
 
-                        } 
+                        }; 
 
                         console.log(threeRestaurantPicks);
 
@@ -284,6 +293,8 @@ $("#findMeAPlace").on("click", function() {
 
                 } else {
 
+                    $("#noResultsBox").text("No Results found for that Input!");
+
                     $("#noResults").show();
 
                     console.log("No results!")
@@ -298,11 +309,13 @@ $("#findMeAPlace").on("click", function() {
 
                 function pickOneLocation () {
 
+                    $("#currentCuisine").text(cuisine); 
+
                     oneRestaurantPick.length = 0;
 
-                    var thingy2 = threeRestaurantPicks[Math.floor(Math.random() * pickThreeLocations.length)];
+                    var thingy = threeRestaurantPicks[Math.floor(Math.random() * pickThreeLocations.length)];
     
-                    oneRestaurantPick.push(thingy2);
+                    oneRestaurantPick.push(thingy);
     
                 };
     
@@ -336,13 +349,21 @@ $("#findMeAPlace").on("click", function() {
 
                 } 
 
-                // console.log(oneRestaurantPick[0].restaurant.thumb)
-
                 // $("#mainVenuePic").attr("src", oneRestaurantPick[0].restaurant.photos_url);
+
+                // $("#phoneNumber").attr("href", "tel:+" + oneRestaurantPick[0].restaurant.phone_numbers)
 
                 $("#linkMenu").attr("href", oneRestaurantPick[0].restaurant.menu_url);
 
-                $("#favorite").attr("dataValue", oneRestaurantPick[0].restaurant.id)
+                $("#favorite").attr("dataValue", oneRestaurantPick[0].restaurant.id);
+
+                $(document).on("click", "#reroll", function() {
+
+                    pickThreeLocations ();
+                    pickOneLocation ();
+                    writeRestaurantToCard (oneRestaurantPick);
+
+                });
 
             };
             
@@ -351,5 +372,7 @@ $("#findMeAPlace").on("click", function() {
         });
         
     }); 
+
+};
 
 });
