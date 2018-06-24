@@ -68,7 +68,7 @@
                                         <a class="dropdown-item" href="#"><span>A REALLY Good Time</span></a>
                                     </div>
                                     </div>
-                                    <input class="form-control" id="priceType" placeholder="----" aria-label="Text input with dropdown button">
+                                    <input class="form-control" id="priceType" placeholder="Pick from dropdown" aria-label="Text input with dropdown button" required>
                                 </div>
                                 <div class="input-group mb-4 col-lg-4 col-md-6 col-xs-12">
                                     <div class="input-group-prepend">
@@ -80,7 +80,7 @@
                                         <a class="dropdown-item" href="#"><span>A half hour or more</span></a>
                                     </div>
                                     </div>
-                                    <input class="form-control" id="rangeType" placeholder="--" aria-label="Text input with dropdown button">
+                                    <input class="form-control" id="rangeType" placeholder="Pick from dropdown" aria-label="Text input with dropdown button" required>
                                 </div>
                             </div>
                     <div class="row">
@@ -94,17 +94,18 @@
                     <div class="row d-flex justify-content-center" id="mainRandomResult">
                         <div class="w-75 card">
                             <div class="card-header text-right">
+                                <span class="text-right" id="currentCuisine"></span>
                                 <span class="text-right"></span><i class="fas fa-star" id="favorite" dataValue="restaurantID"></i></div>
                             <div class="card-body">
                                 <h5 class="card-title" id="mainRestaurantName">Restaurant Name</h5>
                                 <small class="text-muted" id="mainAddress">1000 W. Broad Street, Richmond VA 23220</small> • <small class="text-muted" id="mainCuisineType">Italian, BBQ</small> • <small class="text-muted" id="mainPriceResult">$$$</small>
-                                <br><img id="mainVenuePic" src="">
+                                <!-- <img id="mainVenuePic" src="https://d.zmtcdn.com/data/pictures/chains/8/16774318/a54deb9e4dbb79dd7c8091b30c642077_featured_v2.png"> -->
+                                <a href="" id="phoneNumber"></a>
                             </div>
                             <div class="card-footer text-right">
-                                
                                 <a id="linkMenu" href="#"><small class="btn btn-warning">Get Menu <span class="ml-auto"><i class="fas fa-map"></i></small></a>
                                 <a id="linkDirections" href="#"><small id="getDirections" class="btn btn-primary">Get Directions <span class="ml-auto"><i class="fas fa-map-marker-alt"></i></small></a>
-                                <small id="Reroll" class="btn btn-info">Reroll <span class="ml-auto"><i class="fas fa-dice"></i></small></span>
+                                <small id="reroll" class="btn btn-info">Reroll <span class="ml-auto"><i class="fas fa-dice"></i></small></span>
                             </div>
                         </div>
                     </div>
