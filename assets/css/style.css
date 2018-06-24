@@ -6,3 +6,131 @@
 .text-centered {
     text-align: center;
 }
+
+/*
+font-family: 'Open Sans', sans-serif;
+font-family: 'Oswald', sans-serif;
+font-family: 'UnifrakturCook', cursive;
+*/
+
+body {
+    --main-bg-color: #271F30;
+    --main-box-color: #654F6F;
+    --button-color: #5C5D8D;
+    --emphasiscolor: #A8C69F;
+    --keycolor: #CCE2A3;
+    --outlinecolor: orange;
+    --textcolor: #fff;
+    --textdarkcolor: #000;
+    background-color: var(--main-bg-color);
+    /* font-family: 'Open Sans', sans-serif; */
+  }
+
+#userLoggedIn {
+    display: none;
+}
+
+.navbar {
+    background-color: var(--emphasiscolor)!important;
+    color: var(--textcolor)!important;
+}
+
+.jumbotron-fluid{
+    min-width: 100%;
+    background-color: var(--main-box-color);
+    color: var(--textcolor);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.display-4 {
+    font-family: 'UnifrakturCook', cursive;
+    font-size: 5rem;
+    color: var(--textcolor);
+    text-shadow: orange -2px 2px;
+}
+
+.btn-outline-secondary {
+    background-color: var(--button-color);
+    color: var(--textcolor);
+    border-color: var(--button-color);
+}
+
+.form-control {
+    background-color: var(--emphasiscolor)!important;
+    color: var(--textdarkcolor)!important;
+}
+
+#signOutButton {
+    display: none;
+}
+
+#noResults {
+    display: none
+}
+
+#noResultsBox {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 70%;
+    text-align: center;
+    background-color: var(--main-box-color);
+    padding-top:15px;
+    padding-bottom:15px;
+    font-size: 2rem;
+    border-radius: 5px;
+}
+
+#findMeAPlace {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 70%;
+    text-align: center;
+    background-color:var(--main-box-color);
+    padding-top:15px;
+    padding-bottom:15px;
+    font-size: 2rem;
+    border-radius: 5px;
+    color: var(--textcolor);
+}
+
+#3x {
+    size: 300%;
+}
+
+#5x {
+    size: 500%;
+}
+
+#2x {
+    size: 200%;
+}
+
+#mainVenuePic {
+    max-width: 300px;
+    min-width: 300px;
+    height: auto;
+    min-height: 25px;
+    background: gray;
+}
+
+#favorite {
+    opacity: .8;
+}
+
+.favorited {
+    opacity: 1;
+    color: orange;
+    stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+}
+
+#mainRestaurantName {
+    margin-bottom: -4px!important;
+}
+
+.card {
+    margin-bottom: 10px!important;
+}
