@@ -64,63 +64,65 @@ firebase.auth().signOut().then(function() {
 
 firebase.auth().onAuthStateChanged(function(user) {
 
-if (user) {
+    if (user) {
 
-    var user = firebase.auth().currentUser;
-    var name, email, photoUrl, uid, emailVerified;
+        var user = firebase.auth().currentUser;
+        var name, email, photoUrl, uid, emailVerified;
 
-    console.log("seeing user");
-    // photoUrl = "blank";
+        console.log("seeing user");
+        // photoUrl = "blank";
 
-    if (user != null) {
+        if (user != null) {
 
-        console.log("seeing user variables");
+            console.log("seeing user variables");
 
-        userLoggedIn = true; //favorite toggler
+            userLoggedIn = true; //favorite toggler
 
-        name = user.displayName;
-        email = user.email;
-        photoUrl = user.photoURL;
-        emailVerified = user.emailVerified;
-        uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-                        // this value to authenticate with your backend server, if
-                        // you have one. Use User.getToken() instead.
-        console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
-        var userRef = firebase.database().ref("users/" + uid);
-        globalUID = userRef;
-        console.log("globalUID" + globalUID);
-            
-            if (!userRef.firstLogin) {
-                console.log("First Login");
-                 userRef.update({
-                    name: name,
-                    email: email,
-                    userid: uid,
-                    firstLogin: true,
-                });
-            }
+            name = user.displayName;
+            email = user.email;
+            photoUrl = user.photoURL;
+            emailVerified = user.emailVerified;
+            uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+                            // this value to authenticate with your backend server, if
+                            // you have one. Use User.getToken() instead.
+            console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
+            var userRef = firebase.database().ref("users/" + uid);
+            globalUID = userRef;
+            console.log("globalUID" + globalUID);
+                
+                if (!userRef.firstLogin) {
+                    console.log("First Login");
+                    userRef.update({
+                        name: name,
+                        email: email,
+                        userid: uid,
+                        firstLogin: true,
+                    });
+                };
 
 
-        $('#userLoggedIn').show();
-        $('#signOutButton').show();
-        $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email);
-        $("#loginHere").hide();
+            $('#userLoggedIn').show();
+            $('#signOutButton').show();
+            $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email);
+            $("#loginHere").hide();
 
-    }
-
+        };
 
     // User is signed in.
-} else {
+
+    } else {
 
         $("#loginHere").show();
         $('#loggedInUser').html('');
         $("#userLoggedIn").hide();
         $("#signOutButton").hide();
 
-    // No user is signed in.
-}
+        // No user is signed in.
+    };
+
 });
 
+// Dropdown Functionality 
 
 $(document).on('click', '#eatDrop a', function() {
     var poodle = $(this).children('span').text();
@@ -143,16 +145,34 @@ $(document).on('click', '#rangeDrop a', function() {
     console.log($(this).children('span').text());
 });
 
+// On Click Function To Find Random Restaurant
+
 $("#findMeAPlace").on("click", function() {
 
     event.preventDefault();
 
-    var range = $("#rangeType").val().trim(); 
-    var convertedRange = 0;
-    var cuisineList = ["Italian", "Mexican", "Chinese", "American", "Pizza", "Burgers", "Japanese", "Seafood", "Vegetarian", "Bar", "BBQ", "Indian"]
-    var cuisine = $("#quisineType").val().trim(); console.log(cuisine);
-    var cuisineEmpty = false;
-    var convertedCuisine = 0;
+    var rangeObj = {
+        "One Mile": 1610,
+        "Three Miles": 4900,
+        "Ten Miles": 16090,
+        "Fifty Miles": 80460
+    };
+    var cuisineArray = [55, 73, 25, 1, 82, 168, 60, 83, 308, 227, 193, 148];
+    var cuisineObj = {
+        "Italian": 55,
+        "Mexican": 73,
+        "Chinese": 25,
+        "American": 1,
+        "Pizza": 82,
+        "Burgers": 168,
+        "Japanese": 60,
+        "Seafood": 83,
+        "Vegetarian": 308,
+        "Bar": 227,
+        "BBQ": 193,
+        "Indian": 148,
+        "": cuisineArray[Math.floor(Math.random() * cuisineArray.length)]
+    };
     var price = $("#priceType").val().trim(); 
     var latitude = "";
     var longitude = "";
@@ -162,170 +182,9 @@ $("#findMeAPlace").on("click", function() {
 
     $('#favorite').removeClass('favorited');
 
-    function convertRange (range) {
-
-        switch (range) {
-
-            case "One Mile":
-                convertedRange = 1610; console.log(convertedRange);
-                break;
-
-            case "Three Miles":
-                convertedRange = 4900; console.log(convertedRange);
-                break;
-
-            case "Ten Miles":
-                convertedRange = 16090;
-                break;
-             
-            case "Fifty Miles":
-                convertedRange = 80467;
-                break;
-
-        };
-
-    };
-
-    convertRange (range); 
-
-    function convertCuisine (cuisine) {
-
-        switch (cuisine) {
-
-            case "Italian": 
-            convertedCuisine = 55;
-            $("#currentCuisine").text(cuisine);
-            break;  
-
-            case "Mexican": 
-            convertedCuisine = 73;
-            $("#currentCuisine").text(cuisine);
-            break;
-
-            case "American":
-            convertedCuisine = 1;
-            $("#currentCuisine").text(cuisine);
-            break;
-
-            case "Pizza":
-            convertedCuisine = 82;
-            $("#currentCuisine").text(cuisine)
-            break;
-            
-            case "Burger":
-            convertedCuisine = 168;
-            $("#currentCuisine").text(cuisine);
-            break;
-
-            case "Japanese":
-            convertedCuisine = 60;
-            $("#currentCuisine").text(cuisine);
-            break;
-
-            case "Seafood":
-            convertedCuisine = 83;
-            $("#currentCuisine").text(cuisine);
-            break;
-
-            case "Vegetarian":
-            convertedCuisine = 308;  
-            $("#currentCuisine").text(cuisine); 
-            break;
-
-            case "Bar":
-            convertedCuisine = 227;
-            $("#currentCuisine").text(cuisine);
-            break;
-
-            case "BBQ":
-            convertedCuisine = 193;
-            $("#currentCuisine").text(cuisine);
-            break;
-
-            case "Chinese":
-            convertedCuisine = 25;
-            $("#currentCuisine").text(cuisine);
-            break;
-
-            case "Indian":
-            convertedCuisine = 148;
-            $("#currentCuisine").text(cuisine);
-            break;
-
-            case "":
-            cuisine = cuisineList[Math.floor(Math.random() * cuisineList.length)]; console.log(cuisine);
-            switch (cuisine) {
-
-                case "Italian": 
-                convertedCuisine = 55;
-                $("#currentCuisine").text(cuisine);
-                break;  
+    if (rangeObj[$("#rangeType").val().trim()] === "" || price === "") {
         
-                case "Mexican": 
-                convertedCuisine = 73;
-                $("#currentCuisine").text(cuisine);
-                break;
-        
-                case "American":
-                convertedCuisine = 1;
-                $("#currentCuisine").text(cuisine);
-                break;
-        
-                case "Pizza":
-                convertedCuisine = 82;
-                $("#currentCuisine").text(cuisine)
-                break;
-                
-                case "Burger":
-                convertedCuisine = 168;
-                $("#currentCuisine").text(cuisine);
-                break;
-        
-                case "Japanese":
-                convertedCuisine = 60;
-                $("#currentCuisine").text(cuisine);
-                break;
-        
-                case "Seafood":
-                convertedCuisine = 83;
-                $("#currentCuisine").text(cuisine);
-                break;
-        
-                case "Vegetarian":
-                convertedCuisine = 308;  
-                $("#currentCuisine").text(cuisine); 
-                break;
-        
-                case "Bar":
-                convertedCuisine = 227;
-                $("#currentCuisine").text(cuisine);
-                break;
-        
-                case "BBQ":
-                convertedCuisine = 193;
-                $("#currentCuisine").text(cuisine);
-                break;
-
-                case "Chinese":
-                convertedCuisine = 25;
-                $("#currentCuisine").text(cuisine);
-                break;
-        
-                case "Indian":
-                convertedCuisine = 148;
-                $("#currentCuisine").text(cuisine);
-                break;
-            };
-
-        };
-    
-    };
-
-    convertCuisine (cuisine);
-
-    if (convertedRange === 0 || price === "") {
-        
-        $("#noResultsBox").text("Please enter a value for Cost and Distance")
+        $("#noResultsBox").text("Please enter a value for Cost and Distance");
         
         $("#noResults").show();
 
@@ -334,6 +193,8 @@ $("#findMeAPlace").on("click", function() {
         $("#userRating").text("");
 
     } else {
+
+        $("#currentCuisine").text($("#quisineType").val().trim());
 
         var queryGoogleUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBClQb1B-kxEPNM2zmAfCB2OcwWXawrHEw";
         
@@ -345,7 +206,7 @@ $("#findMeAPlace").on("click", function() {
             latitude = response.location.lat;
             longitude = response.location.lng;
 
-            var queryZomatoUrl = "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude + "&radius=" + convertedRange + "&cuisines=" + convertedCuisine;
+            var queryZomatoUrl = "https://developers.zomato.com/api/v2.1/search?lat=" + latitude + "&lon=" + longitude + "&radius=" + rangeObj[$("#rangeType").val().trim()] + "&cuisines=" + cuisineObj[$("#quisineType").val().trim()];
 
             $.ajax ({
                 url: queryZomatoUrl,
@@ -359,7 +220,7 @@ $("#findMeAPlace").on("click", function() {
                     
                     for (i=0; i < response.restaurants.length; i++) {
                     
-                        if (price === "Cheap" && response.restaurants[i].restaurant.average_cost_for_two < 21 && response.restaurants[i].restaurant.name !== "Croaker's Spot Petersburg") {
+                        if (price === "Cheap" && response.restaurants[i].restaurant.average_cost_for_two < 21) {
                             
                             matchingRestaurants.push(response.restaurants[i]);  
 
@@ -445,7 +306,7 @@ $("#findMeAPlace").on("click", function() {
         
                 };
 
-                pickOneLocation (); console.log(oneRestaurantPick);
+                pickOneLocation ();
 
                 // Writes Restaurant Information From OnRestaurantPick Array Object To HTML
 
