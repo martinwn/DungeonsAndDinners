@@ -242,6 +242,11 @@ $("#findMeAPlace").on("click", function() {
             $("#currentCuisine").text(cuisine);
             break;
 
+            case "Chinese":
+            convertedCuisine = 25;
+            $("#currentCuisine").text(cuisine);
+            break;
+
             case "Indian":
             convertedCuisine = 148;
             $("#currentCuisine").text(cuisine);
@@ -298,6 +303,11 @@ $("#findMeAPlace").on("click", function() {
         
                 case "BBQ":
                 convertedCuisine = 193;
+                $("#currentCuisine").text(cuisine);
+                break;
+
+                case "Chinese":
+                convertedCuisine = 25;
                 $("#currentCuisine").text(cuisine);
                 break;
         
