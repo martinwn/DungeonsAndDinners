@@ -108,12 +108,17 @@ body {
     size: 200%;
 }
 
+#userRating {
+    background-color: red;
+}
+
 #mainVenuePic {
     max-width: 300px;
     min-width: 300px;
     height: auto;
     min-height: 25px;
     background: gray;
+    display: none;
 }
 
 #favorite {

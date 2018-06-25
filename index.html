@@ -74,10 +74,10 @@
                                     <div class="input-group-prepend">
                                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Distance</button>
                                     <div class="dropdown-menu" id="rangeDrop" >
-                                        <a class="dropdown-item" href="#"><span>A few minutes away</span></a>
-                                        <a class="dropdown-item" href="#"><span>A short drive</span></a>
-                                        <a class="dropdown-item" href="#"><span>Somewhere in town</span></a>
-                                        <a class="dropdown-item" href="#"><span>A half hour or more</span></a>
+                                        <a class="dropdown-item" href="#"><span>One Mile</span></a>
+                                        <a class="dropdown-item" href="#"><span>Three Miles</span></a>
+                                        <a class="dropdown-item" href="#"><span>Ten Miles</span></a>
+                                        <a class="dropdown-item" href="#"><span>Fifty Miles</span></a>
                                     </div>
                                     </div>
                                     <input class="form-control" id="rangeType" placeholder="Pick from dropdown" aria-label="Text input with dropdown button" required>
@@ -95,12 +95,13 @@
                         <div class="w-75 card">
                             <div class="card-header text-right">
                                 <span class="text-right" id="currentCuisine"></span>
+                                <span class="badge badge-info"  id="userRating"></span>
                                 <span class="text-right"></span><i class="fas fa-star" id="favorite" dataValue="restaurantID"></i></div>
                             <div class="card-body">
                                 <h5 class="card-title" id="mainRestaurantName">Restaurant Name</h5>
                                 <small class="text-muted" id="mainAddress">1000 W. Broad Street, Richmond VA 23220</small> • <small class="text-muted" id="mainCuisineType">Italian, BBQ</small> • <small class="text-muted" id="mainPriceResult">$$$</small>
-                                <!-- <img id="mainVenuePic" src="https://d.zmtcdn.com/data/pictures/chains/8/16774318/a54deb9e4dbb79dd7c8091b30c642077_featured_v2.png"> -->
-                                <a href="" id="phoneNumber"></a>
+                                <img id="mainVenuePic" src="">
+                                <a href="" id="phoneNumber"></a>                                
                             </div>
                             <div class="card-footer text-right">
                                 <a id="linkMenu" href="#"><small class="btn btn-warning">Get Menu <span class="ml-auto"><i class="fas fa-map"></i></small></a>
