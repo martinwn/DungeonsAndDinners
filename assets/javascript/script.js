@@ -171,11 +171,11 @@ $("#findMeAPlace").on("click", function() {
                 break;
 
             case "Three Miles":
-                convertedRange = 4828;
+                convertedRange = 4900; console.log(convertedRange);
                 break;
 
             case "Ten Miles":
-                convertedRange = 16093;
+                convertedRange = 16090;
                 break;
              
             case "Fifty Miles":
@@ -359,7 +359,7 @@ $("#findMeAPlace").on("click", function() {
                     
                     for (i=0; i < response.restaurants.length; i++) {
                     
-                        if (price === "Cheap" && response.restaurants[i].restaurant.average_cost_for_two < 21) {
+                        if (price === "Cheap" && response.restaurants[i].restaurant.average_cost_for_two < 21 && response.restaurants[i].restaurant.name !== "Croaker's Spot Petersburg") {
                             
                             matchingRestaurants.push(response.restaurants[i]);  
 
