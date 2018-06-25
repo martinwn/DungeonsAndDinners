@@ -132,4 +132,9 @@ body {
 
 .card {
     margin-bottom: 10px!important;
+    display: none;
+}
+
+#favoritesBox {
+    display: none;
 }

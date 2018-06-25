@@ -185,6 +185,8 @@ $("#findMeAPlace").on("click", function() {
     if (rangeObj[$("#rangeType").val().trim()] === "" || price === "") {
         
         $("#noResultsBox").text("Please enter a value for Cost and Distance");
+
+        $(".card").hide();
         
         $("#noResults").show();
 
@@ -224,15 +226,15 @@ $("#findMeAPlace").on("click", function() {
                             
                             matchingRestaurants.push(response.restaurants[i]);  
 
-                        } else if (price === "Moderate" && response.restaurants[i].restaurant.average_cost_for_two > 20 && response.restaurants[i].restaurant.average_cost_for_two < 51) {
+                        } else if (price === "Moderate" && response.restaurants[i].restaurant.average_cost_for_two > 20 && response.restaurants[i].restaurant.average_cost_for_two < 31) {
 
                             matchingRestaurants.push(response.restaurants[i]);  
 
-                        } else if (price === "A Good Time" && response.restaurants[i].restaurant.average_cost_for_two > 50 && response.restaurants[i].restaurant.average_cost_for_two < 91) {
+                        } else if (price === "A Good Time" && response.restaurants[i].restaurant.average_cost_for_two > 30 && response.restaurants[i].restaurant.average_cost_for_two < 51) {
 
                             matchingRestaurants.push(response.restaurants[i]);  
 
-                        } else if (price === "A REALLY Good Time" && response.restaurants[i].restaurant.average_cost_for_two > 90) {
+                        } else if (price === "A REALLY Good Time" && response.restaurants[i].restaurant.average_cost_for_two > 50) {
 
                             matchingRestaurants.push(response.restaurants[i]); 
 
@@ -277,6 +279,8 @@ $("#findMeAPlace").on("click", function() {
                         threeRestaurantPicks.push(matchingRestaurants[0]);
 
                     } else {
+
+                        $(".card").hide();
 
                         $("#noResultsBox").text("No Results found for that Input!");
 
@@ -407,6 +411,8 @@ $("#findMeAPlace").on("click", function() {
                     $("#favorite").attr("dataCuisine", oneRestaurantPick[0].restaurant.cuisines);
                     $("#favorite").attr("dataMenu", oneRestaurantPick[0].restaurant.menu_url);
 
+                    $(".card").show();
+
                 };
                 
                 writeRestaurantToCard (oneRestaurantPick);
@@ -416,6 +422,22 @@ $("#findMeAPlace").on("click", function() {
         }); 
 
     };
+
+});
+
+$(globalUID).on("value", function(snapshot) { 
+
+    console.log("hitting DB listener for favorites");
+
+    favoritesLocal == snapshot.val().favoritesListDB;
+
+    // JSON.parse(favoritesLocal);
+
+    // if (!Array.isArray(favoritesLocal)) {
+    //     favoritesLocal = [];
+    // }
+    console.log("favoriteslocal changed by database to: " + favoritesLocal);
+
 
 });
 
@@ -506,21 +528,7 @@ $(document).on("click", "#favorite", function() {
 //database listener for favorites list
 
 
-$(globalUID).on("value", function(snapshot) { 
 
-    console.log("hitting DB listener for favorites");
-
-    favoritesLocal == snapshot.val().favoritesListDB;
-
-    // JSON.parse(favoritesLocal);
-
-    // if (!Array.isArray(favoritesLocal)) {
-    //     favoritesLocal = [];
-    // }
-    console.log("favoriteslocal changed by database to: " + favoritesLocal);
-
-
-});
 
 
 
