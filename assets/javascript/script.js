@@ -167,8 +167,6 @@ $("#findMeAPlace").on("click", function() {
 
     $('#favoritesBox').hide();
 
-
-
     var rangeArray = [1610, 4900, 16090, 80460];
     var rangeObj = {
         "One Mile": 1610,
@@ -505,24 +503,33 @@ $(document).on("click", "#favorite", function() {
             displayFavorites();
             console.log('seeing display favorites from inside remove favorites'); //this should only go off if favoritesShowing === true
             //it's to redraw displayed favorites to keep the displayed dataIndexes from being off
-        }
+
+        };
 
     } else {
+        $('#myModal').modal('show');
         console.log("user must be signed in for favorites");
-    }
+    };
 
 });
 
 $(document).on("click", "#favoriteNav", function() {
 
-    favoritesShowing = true;
+    if (userLoggedIn === true) {
 
-    $('#favoritesBox').show();
-    $('#mainRandomResult').hide();
-    $('#noResults').hide();
+        favoritesShowing = true;
 
-    displayFavorites();
+        $('#favoritesBox').show();
+        $('#mainRandomResult').hide();
+        $('#noResults').hide();
+    
+        displayFavorites();
 
+    } else {
+
+        $('#myModal').modal('show');
+
+    };
 
 });
 
@@ -534,6 +541,7 @@ function displayFavorites(){
         $("#favoritesBox").empty();
     
     if (favoritesShowing == true) {
+        
         for (var i = 0; i < favoritesLocal.length; i++) {
     
             var writeRestId = favoritesLocal[i].restID;
@@ -544,13 +552,13 @@ function displayFavorites(){
             var writeRestPrice = favoritesLocal[i].restPrice;
             var writeDataIndex = favoritesLocal[i].dataIndex;
     
-            var favoriteBoxDiv = $('<div class="card" style="width: 18rem;"><div class="card-header text-right"><span class="text-right"></span><i class="fas fa-star favorited" id="favorite" dataValue="'+writeRestId+'" dataIndex='+writeDataIndex+'></i></div><div class="card-body"><h5 class="card-title">'+writeRestName+'</h5><p class="card-text">'+writeRestAddress+'</p><p class="card-text">'+writeRestPrice+'</p></div><div class="card-footer"><small class="text-muted">'+writeRestCuisine+'</small></div></div>")');
+            var favoriteBoxDiv = $('<div class="card"><div class="card-header text-right"><span class="text-right"></span><i class="fas fa-star favorited" id="favorite" dataValue="'+writeRestId+'" dataIndex='+writeDataIndex+'></i></div><div class="card-body"><h5 class="card-title">'+writeRestName+'</h5><p class="card-text">'+writeRestAddress+'</p><p class="card-text">'+writeRestPrice+'</p></div><div class="card-footer"><small class="text-muted">'+writeRestCuisine+'</small></div></div>")');
     
             $("#favoritesBox").append(favoriteBoxDiv);
     
-        }
-    }
-}
+        };
+    };
+};
 
 
 

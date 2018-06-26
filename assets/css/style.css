@@ -13,7 +13,6 @@ body {
     --outlinecolor: orange;
     --textcolor: #fff;
     --textdarkcolor: #000;
-    --warning: orange;
     background-color: var(--main-bg-color);
     /* font-family: 'Open Sans', sans-serif; */
   }
@@ -110,7 +109,9 @@ body {
         text-shadow: orange -2px 2px;
     }
 
-
+    #findMeAPlace{
+        font-size: 1.3rem;
+    }
 
 }
 
@@ -178,7 +179,7 @@ body {
     background-color:var(--main-box-color);
     padding-top:15px;
     padding-bottom:15px;
-    font-size: 2rem;
+    font-size: 1.5rem;
     border-radius: 5px;
     color: var(--textcolor);
     cursor: pointer;
@@ -224,10 +225,16 @@ body {
 }
 
 .card {
-    margin-bottom: 10px;
+    margin-bottom: 10px!important;
+    background-color: var(--main-box-color);
+    color: var(--textcolor);
 }
 
 #favoritesBox {
     display: none;
+}
+
+.text-muted {
+    color: lightgray!important;
 }
 
