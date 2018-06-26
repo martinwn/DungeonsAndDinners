@@ -50,15 +50,15 @@ $("#loginHere").on("click", function(event) {
 
 $("#signOutButton").on("click", function(event) {
 
-console.log("signout clicked");
+    console.log("signout clicked");
 
-userLoggedIn = false;
+    userLoggedIn = false;
 
-firebase.auth().signOut().then(function() {
-    console.log("Signed-out"); //Sign-out successful.
-}).catch(function(error) {
-    console.log("Error trying to sign out"); // An error happened.
-});
+    firebase.auth().signOut().then(function() {
+        console.log("Signed-out"); //Sign-out successful.
+    }).catch(function(error) {
+        console.log("Error trying to sign out"); // An error happened.
+    });
 
 });
 
@@ -468,7 +468,7 @@ $(document).on("click", "#favorite", function() {
             
         } else {
             
-            $(this).removeClass("favorited");
+            $(this).removeClass("favorited")
             
             var deleteFavorites = favoritesLocal;
             var currentIndex = $(this).attr("dataIndex");
@@ -482,11 +482,13 @@ $(document).on("click", "#favorite", function() {
 
                 favoritesLocal[x].dataIndex = x;
 
-            }
+            };
         
             globalUID.update({
                 favoritesListDB: favoritesLocal,
             });
+
+            console.log(favorites)
         
             //displayFavorites(); //this should only go off if favoritesShowing === true
             //it's to redraw displayed favorites to keep the displayed dataIndexes from being off
