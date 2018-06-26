@@ -160,6 +160,15 @@ $(document).on('click', '#rangeDrop a', function() {
 $("#findMeAPlace").on("click", function() {
 
     event.preventDefault();
+
+    //adding favorites functionality
+
+    favoritesShowing = false;
+
+    $('#favoritesBox').hide();
+
+
+
     var rangeArray = [1610, 4900, 16090, 80460];
     var rangeObj = {
         "One Mile": 1610,
@@ -279,7 +288,7 @@ $("#findMeAPlace").on("click", function() {
 
                     } else {
 
-                        $(".card").hide();
+                        $('#mainRandomResult').hide();
 
                         $("#noResultsBox").text("No Results found for that Input!");
 
@@ -414,7 +423,7 @@ $("#findMeAPlace").on("click", function() {
                         };
                     };
 
-                    $(".card").show();
+                    $('#mainRandomResult').show();
 
                 };
                 
@@ -499,6 +508,44 @@ $(document).on("click", "#favorite", function() {
     }
 
 });
+
+$(document).on("click", "#favoriteNav", function() {
+
+    favoritesShowing = true;
+
+    $('#favoritesBox').show();
+    $('#mainRandomResult').hide();
+    $('#noResults').hide();
+
+
+});
+
+function displayFavorites(){
+
+    if (favoritesShowing === true) {
+
+        event.preventDefault();            
+
+        $("#favoritesBox").empty();
+    
+    
+        for (var i = 0; i < favoritesLocal.length; i++) {
+    
+            var writeRestId = favoritesLocal[i].restID;
+            var writeRestName = favoritesLocal[i].restName;
+            var writeRestAddress = favoritesLocal[i].restAddress;
+            var writeRestCuisine = favoritesLocal[i].restCuisine;
+            // var writeRestMenu = favoritesLocal[i].restMenu;
+            var writeRestPrice = favoritesLocal[i].restPrice;
+            var writeDataIndex = favoritesLocal[i].dataIndex;
+    
+            var favoriteBoxDiv = $('<div class="card" style="width: 18rem;"><div class="card-header text-right"><span class="text-right"></span><i class="fas fa-star favorited" id="favorite" dataValue="'+writeRestId+'" dataIndex='+writeDataIndex+'></i></div><div class="card-body"><h5 class="card-title">'+writeRestName+'</h5><p class="card-text">'+writeRestAddress+'</p><p class="card-text">'+writeRestPrice+'</p></div><div class="card-footer"><small class="text-muted">'+writeRestCuisine+'</small></div></div>")');
+    
+            $("#favoritesBox").append(favoriteBoxDiv);
+    
+        }
+    }
+}
 
 
 

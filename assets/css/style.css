@@ -218,9 +218,13 @@ body {
     margin-bottom: -4px!important;
 }
 
-.card {
+#mainRandomResult{
     margin-bottom: 10px!important;
     display: none;
+}
+
+.card {
+    margin-bottom: 10px;
 }
 
 #favoritesBox {
