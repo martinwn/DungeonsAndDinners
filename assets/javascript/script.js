@@ -499,7 +499,7 @@ $(document).on("click", "#favorite", function() {
 
             console.log(favorites)
         
-            //displayFavorites(); //this should only go off if favoritesShowing === true
+            displayFavorites(); //this should only go off if favoritesShowing === true
             //it's to redraw displayed favorites to keep the displayed dataIndexes from being off
         }
 
@@ -516,6 +516,8 @@ $(document).on("click", "#favoriteNav", function() {
     $('#favoritesBox').show();
     $('#mainRandomResult').hide();
     $('#noResults').hide();
+
+    displayFavorites();
 
 
 });
