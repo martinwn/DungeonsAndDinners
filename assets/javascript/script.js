@@ -100,6 +100,25 @@ firebase.auth().onAuthStateChanged(function(user) {
                     });
                 };
 
+                   //database listener for favorites list
+
+
+                   userRef.on("value", function(snapshot) { 
+
+                    console.log("hitting DB listener for favorites");
+
+                    favoritesLocal = snapshot.val().favoritesListDB;
+
+                    console.log(favoritesLocal);
+
+                    if (!Array.isArray(favoritesLocal)) {
+                        favoritesLocal = [];
+                    }
+                    console.log("favoriteslocal changed by database to: " + favoritesLocal);
+
+
+                });
+
 
             $('#userLoggedIn').show();
             $('#signOutButton').show();
@@ -411,6 +430,19 @@ $("#findMeAPlace").on("click", function() {
                     $("#favorite").attr("dataCuisine", oneRestaurantPick[0].restaurant.cuisines);
                     $("#favorite").attr("dataMenu", oneRestaurantPick[0].restaurant.menu_url);
 
+                        //checking to see if favorite already exists
+                        
+                        for (x=0; x<favoritesLocal.length; x++){
+                            if (oneRestaurantPick[0].restaurant.id == favoritesLocal[x].restID) {
+
+                                console.log("Restaurant already a favorite at index: " + favoritesLocal[x].dataIndex);
+
+                                $("#favorite").addClass("favorited");
+                                $('#favorite').attr("dataIndex", favoritesLocal[x].dataIndex);
+                                
+                            };
+                        };
+
                     $(".card").show();
 
                 };
@@ -422,22 +454,6 @@ $("#findMeAPlace").on("click", function() {
         }); 
 
     };
-
-});
-
-$(globalUID).on("value", function(snapshot) { 
-
-    console.log("hitting DB listener for favorites");
-
-    favoritesLocal == snapshot.val().favoritesListDB;
-
-    // JSON.parse(favoritesLocal);
-
-    // if (!Array.isArray(favoritesLocal)) {
-    //     favoritesLocal = [];
-    // }
-    console.log("favoriteslocal changed by database to: " + favoritesLocal);
-
 
 });
 
@@ -458,9 +474,6 @@ $(document).on("click", "#favorite", function() {
             var favPrice = $(this).attr("dataPrice");
 
             var favIndex = favoritesLocal.length;
-            
-
-            
             var favoritesObj = {};
 
             favoritesObj['restID'] = favValue;
@@ -478,8 +491,6 @@ $(document).on("click", "#favorite", function() {
             favoritesLocal.push(favoritesObj);
 
             console.log("favoritesLocal after push: " + favoritesLocal);
-
-
 
             globalUID.update({
                 favoritesListDB: favoritesLocal,
@@ -501,10 +512,14 @@ $(document).on("click", "#favorite", function() {
             deleteFavorites.splice(currentIndex, 1);
             favoritesLocal = deleteFavorites;
 
-
-
-
             console.log("favorites after removal: " + favoritesLocal); 
+
+            //fixing our data Indexes so they're accurate
+            for ( x=0; x<favoritesLocal.length; x++ ){
+
+                favoritesLocal[x].dataIndex = x;
+
+            }
         
             globalUID.update({
                 favoritesListDB: favoritesLocal,
@@ -524,9 +539,6 @@ $(document).on("click", "#favorite", function() {
     }
 
 });
-
-//database listener for favorites list
-
 
 
 

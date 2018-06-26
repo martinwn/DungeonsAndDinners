@@ -13,6 +13,7 @@ body {
     --outlinecolor: orange;
     --textcolor: #fff;
     --textdarkcolor: #000;
+    --warning: orange;
     background-color: var(--main-bg-color);
     /* font-family: 'Open Sans', sans-serif; */
   }
@@ -21,6 +22,11 @@ body {
     display: none;
 }
 
+.nav-link {
+    display: inline;
+}
+
+
 .navbar {
     background-color: var(--emphasiscolor)!important;
     color: var(--textcolor)!important;
@@ -28,13 +34,103 @@ body {
 
 .jumbotron-fluid{
     min-width: 100%;
+    background-image: url("../images/jumbodiv.png");
+    background-size: cover;
+    background-position: left bottom;
     background-color: var(--main-box-color);
+
     color: var(--textcolor);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    z-index: 1;
+}
+
+.jumbotron-fluid::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 250px; 
+    height: 259px;  
+    z-index: 3;
+    background: url("../images/dragontopper.png");
+    background-size: cover;
+  }
+
+  #getTheeOnTop {
+      position: absolute;
+      display: inline;
+      z-index: 5;
+  }
+
+@media screen and (max-width: 768px) {
+
+    .jumbotron-fluid{
+        min-width: 100%;
+        background: url("../images/dragontopsmall.png") right bottom no-repeat,
+                    url("../images/jumbodiv.png") left bottom no-repeat;
+        background-size: auto auto, 110% auto;
+        /* background-size: cover;
+        background-position: left bottom; */
+        /* background-color: var(--main-box-color); */
+    
+        color: var(--textcolor);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        z-index: 1;
+    }
+
+    .jumbotron-fluid::before {
+        display:none;
+        content: "";
+        position: absolute;
+        top: 10%;
+        right: 5%;
+        width: 150px; 
+        height: 155px;  
+        z-index: 3;
+        background: url("../images/dragontopper.png");
+        background-size: cover;
+        overflow: hidden;
+      }
+    
+      #getTheeOnTop {
+          position: absolute;
+          display: inline;
+          z-index: 5;
+      }
+
+
+    .display-4 {
+        display: inline;
+        margin-right: 1rem;
+        font-family: 'UnifrakturCook', cursive;
+        font-size: 3.5rem!important;
+        color: var(--textcolor);
+        text-shadow: orange -2px 2px;
+    }
+
+
+
+}
+
+@media screen and (max-width: 575px) {
+    .display-4 {
+        font-size: 2.3rem!important;
+    }
+}
+
+  
+#leadStyle {
+    background-color: rgba(101, 79, 111, 0.75);
+    border-radius: 5px;
+    padding: 3px;
+    padding-left: 10px;
 }
 
 .display-4 {
+    display: inline;
+    margin-right: 1rem;
     font-family: 'UnifrakturCook', cursive;
     font-size: 5rem;
     color: var(--textcolor);
@@ -70,7 +166,6 @@ body {
     padding-top:15px;
     padding-bottom:15px;
     font-size: 2rem;
-    color: var(--textcolor);
     border-radius: 5px;
 }
 
@@ -86,7 +181,6 @@ body {
     font-size: 2rem;
     border-radius: 5px;
     color: var(--textcolor);
-    cursor: pointer;
 }
 
 #3x {
@@ -101,40 +195,27 @@ body {
     size: 200%;
 }
 
-#userRating {
-    background-color: red;
-}
-
 #mainVenuePic {
     max-width: 300px;
     min-width: 300px;
     height: auto;
     min-height: 25px;
     background: gray;
-    display: none;
 }
 
 #favorite {
     opacity: .8;
-    cursor: pointer;
 }
 
 .favorited {
-    opacity: 1;
     color: orange;
-    stroke-width: 1px;
-    -webkit-text-stroke-color: white;
 }
-
 #mainRestaurantName {
     margin-bottom: -4px!important;
 }
 
 .card {
     margin-bottom: 10px!important;
-    display: none;
+    /* display:none; */
 }
 
-#favoritesBox {
-    display: none;
-}
