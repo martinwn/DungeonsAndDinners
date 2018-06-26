@@ -502,7 +502,10 @@ $(document).on("click", "#favorite", function() {
 
             console.log(favorites)
         
-            displayFavorites(); //this should only go off if favoritesShowing === true
+            $("#favoritesBox").empty();
+            
+            displayFavorites();
+            console.log('seeing display favorites from inside remove favorites'); //this should only go off if favoritesShowing === true
             //it's to redraw displayed favorites to keep the displayed dataIndexes from being off
         }
 
@@ -529,6 +532,7 @@ function displayFavorites(){
 
         event.preventDefault();            
 
+        console.log("seeing the display favorites function inside the function");
         $("#favoritesBox").empty();
     
     if (favoritesShowing == true) {
