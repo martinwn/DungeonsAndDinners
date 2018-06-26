@@ -71,15 +71,6 @@ body {
         color: var(--textcolor);
         text-shadow: orange -2px 2px;
     }
-
-    #findMeAPlace{
-        font-size: 1.3rem;
-    }
-
-
-
-
-
   
 #leadStyle {
     background-color: rgba(101, 79, 111, 0.75);
@@ -101,6 +92,10 @@ body {
     background-color: var(--button-color);
     color: var(--textcolor);
     border-color: var(--button-color);
+}
+
+.btn {
+    margin-bottom: 5px;
 }
 
 .form-control {
@@ -240,6 +235,10 @@ body {
 
       .nav-item{
           font-size: .8rem;
+      }
+
+      #findMeAPlace{
+        font-size: 1rem;
       }
 
     }
