@@ -94,7 +94,15 @@ body {
     border-color: var(--button-color);
 }
 
-.btn {
+.btn-success {
+    margin-bottom: 5px;
+}
+
+.btn-warning {
+    margin-bottom: 5px;
+}
+
+.btn-info {
     margin-bottom: 5px;
 }
 
