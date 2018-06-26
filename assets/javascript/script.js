@@ -328,6 +328,9 @@ $("#findMeAPlace").on("click", function() {
 
                     $("#mainCuisineType").text(oneRestaurantPick[0].restaurant.cuisines);
 
+                    $("#favorite").attr("dataPrice", "$");
+
+
                     if (price === "Cheap") {
                         
                         $("#mainPriceResult").text("$");
@@ -524,13 +527,11 @@ $(document).on("click", "#favoriteNav", function() {
 
 function displayFavorites(){
 
-    if (favoritesShowing === true) {
-
         event.preventDefault();            
 
         $("#favoritesBox").empty();
     
-    
+    if (favoritesShowing == true) {
         for (var i = 0; i < favoritesLocal.length; i++) {
     
             var writeRestId = favoritesLocal[i].restID;
