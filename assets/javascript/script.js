@@ -499,11 +499,9 @@ $(document).on("click", "#favorite", function() {
             globalUID.update({
                 favoritesListDB: favoritesLocal,
             });
-
-            console.log(favorites)
         
             $("#favoritesBox").empty();
-            
+
             displayFavorites();
             console.log('seeing display favorites from inside remove favorites'); //this should only go off if favoritesShowing === true
             //it's to redraw displayed favorites to keep the displayed dataIndexes from being off
