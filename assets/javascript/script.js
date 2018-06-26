@@ -328,7 +328,7 @@ $("#findMeAPlace").on("click", function() {
 
                     $("#mainCuisineType").text(oneRestaurantPick[0].restaurant.cuisines);
 
-                    $("#favorite").attr("dataPrice", "$");
+                    $("#favorite").attr("dataPrice", "?");
 
 
                     if (price === "Cheap") {
