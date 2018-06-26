@@ -181,6 +181,7 @@ body {
     font-size: 2rem;
     border-radius: 5px;
     color: var(--textcolor);
+    cursor: pointer;
 }
 
 #3x {
@@ -201,21 +202,28 @@ body {
     height: auto;
     min-height: 25px;
     background: gray;
+    display: none;
 }
 
 #favorite {
     opacity: .8;
+    cursor: pointer;
 }
 
 .favorited {
     color: orange;
 }
+
 #mainRestaurantName {
     margin-bottom: -4px!important;
 }
 
 .card {
     margin-bottom: 10px!important;
-    /* display:none; */
+    display: none;
+}
+
+#favoritesBox {
+    display: none;
 }
 

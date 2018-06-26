@@ -102,20 +102,13 @@ firebase.auth().onAuthStateChanged(function(user) {
 
                    //database listener for favorites list
 
-
                    userRef.on("value", function(snapshot) { 
 
-                    console.log("hitting DB listener for favorites");
-
                     favoritesLocal = snapshot.val().favoritesListDB;
-
-                    console.log(favoritesLocal);
 
                     if (!Array.isArray(favoritesLocal)) {
                         favoritesLocal = [];
                     }
-                    console.log("favoriteslocal changed by database to: " + favoritesLocal);
-
 
                 });
 
@@ -142,7 +135,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 // Dropdown Functionality 
-
 $(document).on('click', '#eatDrop a', function() {
     var poodle = $(this).children('span').text();
     $('#quisineType').val(poodle);
@@ -165,16 +157,16 @@ $(document).on('click', '#rangeDrop a', function() {
 });
 
 // On Click Function To Find Random Restaurant
-
 $("#findMeAPlace").on("click", function() {
 
     event.preventDefault();
-
+    var rangeArray = [1610, 4900, 16090, 80460];
     var rangeObj = {
         "One Mile": 1610,
         "Three Miles": 4900,
         "Ten Miles": 16090,
-        "Fifty Miles": 80460
+        "Fifty Miles": 80460,
+        "": rangeArray[Math.floor(Math.random() * rangeArray.length)]
     };
     var cuisineArray = [55, 73, 25, 1, 82, 168, 60, 83, 308, 227, 193, 148];
     var cuisineObj = {
@@ -201,20 +193,6 @@ $("#findMeAPlace").on("click", function() {
 
     $('#favorite').removeClass('favorited');
 
-    if (rangeObj[$("#rangeType").val().trim()] === "" || price === "") {
-        
-        $("#noResultsBox").text("Please enter a value for Cost and Distance");
-
-        $(".card").hide();
-        
-        $("#noResults").show();
-
-        $("#currentCuisine").text("");
-
-        $("#userRating").text("");
-
-    } else {
-
         $("#currentCuisine").text($("#quisineType").val().trim());
 
         var queryGoogleUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBClQb1B-kxEPNM2zmAfCB2OcwWXawrHEw";
@@ -236,12 +214,15 @@ $("#findMeAPlace").on("click", function() {
             }).then(function(response) {
 
                 // Filters Ajax Results To Comply With Price Input 
-
                 matchingRestaurants.length = 0;
                     
                     for (i=0; i < response.restaurants.length; i++) {
-                    
-                        if (price === "Cheap" && response.restaurants[i].restaurant.average_cost_for_two < 21) {
+
+                        if (price === "") {
+
+                            matchingRestaurants.push(response.restaurants[i]);  
+
+                        } else if (price === "Cheap" && response.restaurants[i].restaurant.average_cost_for_two < 21) {
                             
                             matchingRestaurants.push(response.restaurants[i]);  
 
@@ -262,7 +243,6 @@ $("#findMeAPlace").on("click", function() {
                     };
 
                 // Randomly Sets Three Restaurant Objects From matchingRestaurants In A New Array
-
                 function pickThreeLocations () {
 
                     threeRestaurantPicks.length = 0;
@@ -314,7 +294,6 @@ $("#findMeAPlace").on("click", function() {
                 pickThreeLocations ();    
 
                 // Randomly Sets One Restaurant Obect From threeRestaurantPicks To A New Array
-                
                 if (threeRestaurantPicks.length > 0) {
 
                     function pickOneLocation () {
@@ -332,7 +311,6 @@ $("#findMeAPlace").on("click", function() {
                 pickOneLocation ();
 
                 // Writes Restaurant Information From OnRestaurantPick Array Object To HTML
-
                 function writeRestaurantToCard (oneRestaurantPick) {
 
                     $("#mainRestaurantName").text(oneRestaurantPick[0].restaurant.name);
@@ -366,11 +344,9 @@ $("#findMeAPlace").on("click", function() {
                     }; 
 
                     // Adding Link To Menu
-
                     $("#linkMenu").attr("href", oneRestaurantPick[0].restaurant.menu_url);
 
                     // Adding Functionality To Reroll Button
-
                     $(document).on("click", "#reroll", function() {
 
                         if (threeRestaurantPicks.length === 1) {
@@ -391,7 +367,6 @@ $("#findMeAPlace").on("click", function() {
                     });
 
                     // Writing Image To HTML If Available
-
                     if (oneRestaurantPick[0].restaurant.featured_image !== "") {
 
                         $("#mainVenuePic").attr("src", oneRestaurantPick[0].restaurant.featured_image);
@@ -405,43 +380,39 @@ $("#findMeAPlace").on("click", function() {
                     };
 
                     // Adding Phone Number If Available
-
                     $("#phoneNumber").attr("href", "tel:+" + oneRestaurantPick[0].restaurant.phone_numbers)
 
                     $("#phoneNumber").text(oneRestaurantPick[0].restaurant.phone_numbers);
 
                     // Adding Functionality To Directions Button With Google Maps
-
                     var googleUrl = "https://www.google.com/maps/search/?api=1&query=" + oneRestaurantPick[0].restaurant.location.latitude + "," + oneRestaurantPick[0].restaurant.location.longitude;
 
                     $("#linkDirections").attr("href", googleUrl);
 
                     // Writing User Rating To HTML
-
                     $("#userRating").text(oneRestaurantPick[0].restaurant.user_rating.aggregate_rating);
 
                     $("#userRating").css("backgroundColor", "#" +  oneRestaurantPick[0].restaurant.user_rating.rating_color);
                 
                     //adding all of these for favorites use
-
                     $("#favorite").attr("dataValue", oneRestaurantPick[0].restaurant.id);
                     $("#favorite").attr("dataName", oneRestaurantPick[0].restaurant.name);
                     $("#favorite").attr("dataAddress", oneRestaurantPick[0].restaurant.location.address);
                     $("#favorite").attr("dataCuisine", oneRestaurantPick[0].restaurant.cuisines);
                     $("#favorite").attr("dataMenu", oneRestaurantPick[0].restaurant.menu_url);
 
-                        //checking to see if favorite already exists
+                    //checking to see if favorite already exists
+                    for (x=0; x<favoritesLocal.length; x++){
                         
-                        for (x=0; x<favoritesLocal.length; x++){
-                            if (oneRestaurantPick[0].restaurant.id == favoritesLocal[x].restID) {
+                        if (oneRestaurantPick[0].restaurant.id == favoritesLocal[x].restID) {
 
-                                console.log("Restaurant already a favorite at index: " + favoritesLocal[x].dataIndex);
+                            console.log("Restaurant already a favorite at index: " + favoritesLocal[x].dataIndex);
 
-                                $("#favorite").addClass("favorited");
-                                $('#favorite').attr("dataIndex", favoritesLocal[x].dataIndex);
-                                
-                            };
+                            $("#favorite").addClass("favorited");
+                            $('#favorite').attr("dataIndex", favoritesLocal[x].dataIndex);
+                            
                         };
+                    };
 
                     $(".card").show();
 
@@ -453,12 +424,9 @@ $("#findMeAPlace").on("click", function() {
             
         }); 
 
-    };
-
 });
 
 //building favorites code
-
 $(document).on("click", "#favorite", function() {
 
     if (userLoggedIn === true) {
@@ -499,20 +467,15 @@ $(document).on("click", "#favorite", function() {
             $(this).attr("dataIndex", favIndex);
             
         } else {
-            console.log ("trying to remove favorite");
             
             $(this).removeClass("favorited");
             
             var deleteFavorites = favoritesLocal;
             var currentIndex = $(this).attr("dataIndex");
 
-            console.log("current index: " + currentIndex);
-
             // Deletes the item marked for deletion
             deleteFavorites.splice(currentIndex, 1);
             favoritesLocal = deleteFavorites;
-
-            console.log("favorites after removal: " + favoritesLocal); 
 
             //fixing our data Indexes so they're accurate
             for ( x=0; x<favoritesLocal.length; x++ ){
@@ -524,15 +487,10 @@ $(document).on("click", "#favorite", function() {
             globalUID.update({
                 favoritesListDB: favoritesLocal,
             });
-
-            
-
+        
             //displayFavorites(); //this should only go off if favoritesShowing === true
             //it's to redraw displayed favorites to keep the displayed dataIndexes from being off
         }
-
-
-
 
     } else {
         console.log("user must be signed in for favorites");
