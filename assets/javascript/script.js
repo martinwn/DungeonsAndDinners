@@ -507,8 +507,11 @@ $(document).on("click", "#favorite", function() {
         };
 
     } else {
+
+        $(".modal-body").text("User must be logged in to add favorites!");
+
         $('#myModal').modal('show');
-        console.log("user must be signed in for favorites");
+
     };
 
 });
@@ -527,6 +530,8 @@ $(document).on("click", "#favoriteNav", function() {
 
     } else {
 
+        $(".modal-body").text("User must be logged in to view favorites!");
+
         $('#myModal').modal('show');
 
     };
@@ -541,7 +546,7 @@ function displayFavorites(){
         $("#favoritesBox").empty();
     
     if (favoritesShowing == true) {
-        
+
         for (var i = 0; i < favoritesLocal.length; i++) {
     
             var writeRestId = favoritesLocal[i].restID;
