@@ -498,15 +498,12 @@ $(document).on("click", "#favoriteNav", function() {
     if (userLoggedIn === true) {
 
     $('#favoritesBox').show();
-    // $('#favoritesBox').addClass("fadeInUp");
     $('#mainRandomResult').hide();
     $('#noResults').hide();
 
-        $('#favoritesBox').show();
-        $('#mainRandomResult').hide();
-        $('#noResults').hide();
+
     
-        displayFavorites();
+    displayFavorites();
 
     } else {
 
