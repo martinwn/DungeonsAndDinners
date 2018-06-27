@@ -497,6 +497,8 @@ $(document).on("click", "#favoriteNav", function() {
 
     if (userLoggedIn === true) {
 
+    favoritesShowing = true;
+
     $('#favoritesBox').show();
     $('#mainRandomResult').hide();
     $('#noResults').hide();
@@ -515,8 +517,7 @@ $(document).on("click", "#favoriteNav", function() {
 
 function displayFavorites(){
 
-    console.log('drawing favorites');
-            
+    console.log()        
         event.preventDefault();            
 
         $("#favoritesBox").empty();
