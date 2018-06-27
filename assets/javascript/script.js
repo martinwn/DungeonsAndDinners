@@ -500,8 +500,6 @@ $(document).on("click", "#favoriteNav", function() {
     $('#favoritesBox').show();
     $('#mainRandomResult').hide();
     $('#noResults').hide();
-
-
     
     displayFavorites();
 
@@ -517,6 +515,8 @@ $(document).on("click", "#favoriteNav", function() {
 
 function displayFavorites(){
 
+    console.log('drawing favorites');
+            
         event.preventDefault();            
 
         $("#favoritesBox").empty();
@@ -533,7 +533,7 @@ function displayFavorites(){
             var writeRestPrice = favoritesLocal[i].restPrice;
             var writeDataIndex = favoritesLocal[i].dataIndex;
     
-            var favoriteBoxDiv = $('<div class="card"><div class="card-header text-right"><span class="text-right"></span><i class="fas fa-star favorited" id="favorite" dataValue="'+writeRestId+'" dataIndex='+writeDataIndex+'></i></div><div class="card-body"><h5 class="card-title">'+writeRestName+'</h5><p class="card-text">'+writeRestAddress+'</p><p class="card-text">'+writeRestPrice+'</p></div><div class="card-footer"><small class="text-muted">'+writeRestCuisine+'</small></div></div>")');
+            var favoriteBoxDiv = $('<div class="card fadeInUp"><div class="card-header text-right"><span class="text-right"></span><i class="fas fa-star favorited" id="favorite" dataValue="'+writeRestId+'" dataIndex='+writeDataIndex+'></i></div><div class="card-body"><h5 class="card-title">'+writeRestName+'</h5><p class="card-text">'+writeRestAddress+'</p><p class="card-text">'+writeRestPrice+'</p></div><div class="card-footer"><small class="text-muted">'+writeRestCuisine+'</small></div></div>")');
     
             $("#favoritesBox").append(favoriteBoxDiv);
     
