@@ -127,22 +127,26 @@
                 </div>
             </div>    
             <div class="card-columns" id="favoritesBox">
-
-                <div class="card" style="width: 18rem;">
-                    <div class="card-header text-right">
-                            <span class="text-right"></span><i class="fas fa-star" id="favorite" dataValue="restaurantID"></i></div>
-                    <div class="card-body">
-                        <h5 class="card-title">Restaurant Name</h5>
-                        <p class="card-text">1100 W. Broad Street, Richmond VA 23112</p>
-                        <p class="card-text">$$$</p>
-                    </div>
-                    <div class="card-footer">
-                            <small class="text-muted">Italian, BBQ</small>
-                    </div>
-                </div>
-
             </div>
 
+            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Favorites Selected</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>User must be logged in to add favorites!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+              </div>
+            </div>
         </div>    
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

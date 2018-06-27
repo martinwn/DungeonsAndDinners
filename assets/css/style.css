@@ -47,7 +47,7 @@ body {
 .jumbotron-fluid::before {
     content: "";
     position: absolute;
-    top: 10%;
+    top: 6%;
     right: 10%;
     width: 250px; 
     height: 259px;  
@@ -99,66 +99,6 @@ body {
     animation-fill-mode: both;
     animation-iteration-count: 1;
 }
-
-@media screen and (max-width: 768px) {
-
-    .jumbotron-fluid{
-        min-width: 100%;
-        background: url("../images/dragontopsmall.png") right bottom no-repeat,
-                    url("../images/jumbodiv.png") left bottom no-repeat;
-        background-size: auto auto, 110% auto;
-        /* background-size: cover;
-        background-position: left bottom; */
-        /* background-color: var(--main-box-color); */
-    
-        color: var(--textcolor);
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        z-index: 1;
-    }
-
-    .jumbotron-fluid::before {
-        display:none;
-        content: "";
-        position: absolute;
-        top: 10%;
-        right: 5%;
-        width: 150px; 
-        height: 155px;  
-        z-index: 3;
-        background: url("../images/dragontopper.png");
-        background-size: cover;
-        overflow: hidden;
-      }
-    
-      #getTheeOnTop {
-          position: absolute;
-          display: inline;
-          z-index: 5;
-      }
-
-
-    .display-4 {
-        display: inline;
-        margin-right: 1rem;
-        font-family: 'UnifrakturCook', cursive;
-        font-size: 3.5rem!important;
-        color: var(--textcolor);
-        text-shadow: orange -2px 2px;
-    }
-
-    #findMeAPlace{
-        font-size: 1.3rem;
-    }
-
-}
-
-@media screen and (max-width: 575px) {
-    .display-4 {
-        font-size: 2.3rem!important;
-    }
-}
-
   
 #leadStyle {
     background-color: rgba(101, 79, 111, 0.75);
@@ -180,6 +120,18 @@ body {
     background-color: var(--button-color);
     color: var(--textcolor);
     border-color: var(--button-color);
+}
+
+.btn-primary {
+    margin-bottom: 5px;
+}
+
+.btn-warning {
+    margin-bottom: 5px;
+}
+
+.btn-info {
+    margin-bottom: 5px;
 }
 
 .form-control {
@@ -217,7 +169,7 @@ body {
     background-color:var(--main-box-color);
     padding-top:15px;
     padding-bottom:15px;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     border-radius: 5px;
     color: var(--textcolor);
     cursor: pointer;
@@ -276,3 +228,60 @@ body {
     color: lightgray!important;
 }
 
+@media screen and (max-width: 768px) {
+
+    .jumbotron-fluid{
+        min-width: 100%;
+        background: url("../images/dragontopsmall.png") right bottom no-repeat,
+                    url("../images/jumbodiv.png") left bottom no-repeat;
+        background-size: auto auto, 110% auto;
+        /* background-size: cover;
+        background-position: left bottom; */
+        /* background-color: var(--main-box-color); */
+    
+        color: var(--textcolor);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        z-index: 1;
+    }
+
+    .jumbotron-fluid::before {
+        display:none;
+        content: "";
+        position: absolute;
+        top: 10%;
+        right: 5%;
+        width: 150px; 
+        height: 155px;  
+        z-index: 3;
+        background: url("../images/dragontopper.png");
+        background-size: cover;
+        overflow: hidden;
+      }
+    
+      #getTheeOnTop {
+          position: absolute;
+          display: inline;
+          z-index: 5;
+      }
+
+      .lead {
+          font-size: .8rem;
+      }
+
+      .nav-item{
+          font-size: .8rem;
+      }
+
+      #findMeAPlace{
+        font-size: 1rem;
+      }
+
+    }
+
+
+      @media screen and (max-width: 575px) {
+        .display-4 {
+            font-size: 2.3rem!important;
+        }
+    }

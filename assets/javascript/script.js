@@ -20,18 +20,12 @@ var favoritesLocal = [];
 
 $("#loginHere").on("click", function(event) {
 
-    console.log("login clicked");
-
     firebase.auth().signInWithPopup(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         // The signed-in user info.
         var user = result.user;
-        console.log("user: " + user.name);
-        console.log("email: " + user.email);
-        // ...
-        console.log("userID: " + user.userid);
-        console.log("userToken: " + token);
+
     }).catch(function(error) {
 
         console.log("hitting error");
@@ -42,15 +36,12 @@ $("#loginHere").on("click", function(event) {
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
-        console.log("errorcode: " + errorCode + " errormessage: " + errorMessage + " email: " + email + " credential: " + credential);
         // ...
     });
 
 });
 
 $("#signOutButton").on("click", function(event) {
-
-    console.log("signout clicked");
 
     userLoggedIn = false;
 
@@ -69,12 +60,9 @@ firebase.auth().onAuthStateChanged(function(user) {
         var user = firebase.auth().currentUser;
         var name, email, photoUrl, uid, emailVerified;
 
-        console.log("seeing user");
         // photoUrl = "blank";
 
         if (user != null) {
-
-            console.log("seeing user variables");
 
             userLoggedIn = true; //favorite toggler
 
@@ -85,13 +73,10 @@ firebase.auth().onAuthStateChanged(function(user) {
             uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
                             // this value to authenticate with your backend server, if
                             // you have one. Use User.getToken() instead.
-            console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
             var userRef = firebase.database().ref("users/" + uid);
             globalUID = userRef;
-            console.log("globalUID" + globalUID);
                 
                 if (!userRef.firstLogin) {
-                    console.log("First Login");
                     userRef.update({
                         name: name,
                         email: email,
@@ -138,22 +123,16 @@ firebase.auth().onAuthStateChanged(function(user) {
 $(document).on('click', '#eatDrop a', function() {
     var poodle = $(this).children('span').text();
     $('#quisineType').val(poodle);
-    console.log(this);
-    console.log($(this).children('span').text());
 });
 
 $(document).on('click', '#priceDrop a', function() {
     var poodle = $(this).children('span').text();
     $('#priceType').val(poodle);
-    console.log(this);
-    console.log($(this).children('span').text());
 });
 
 $(document).on('click', '#rangeDrop a', function() {
     var poodle = $(this).children('span').text();
     $('#rangeType').val(poodle);
-    console.log(this);
-    console.log($(this).children('span').text());
 });
 
 // On Click Function To Find Random Restaurant
@@ -166,8 +145,6 @@ $("#findMeAPlace").on("click", function() {
     favoritesShowing = false;
 
     $('#favoritesBox').hide();
-
-
 
     var rangeArray = [1610, 4900, 16090, 80460];
     var rangeObj = {
@@ -295,8 +272,6 @@ $("#findMeAPlace").on("click", function() {
                         $('#noResults').removeClass("fadeInUp");
                         $("#noResults").show();
                         $('#noResults').addClass("fadeInUp");
-
-                        console.log("No results!")
 
                     };
                     
@@ -470,13 +445,7 @@ $(document).on("click", "#favorite", function() {
             favoritesObj['restPrice'] = favPrice;
             favoritesObj['dataIndex'] = favIndex;
 
-            console.log('FavoritesOBJ: ' + favoritesObj);
-
-            console.log("favoritesLocal: " + favoritesLocal);
-
             favoritesLocal.push(favoritesObj);
-
-            console.log("favoritesLocal after push: " + favoritesLocal);
 
             globalUID.update({
                 favoritesListDB: favoritesLocal,
@@ -511,25 +480,41 @@ $(document).on("click", "#favorite", function() {
             displayFavorites();
             console.log('seeing display favorites from inside remove favorites'); //this should only go off if favoritesShowing === true
             //it's to redraw displayed favorites to keep the displayed dataIndexes from being off
-        }
+
+        };
 
     } else {
-        console.log("user must be signed in for favorites");
-    }
+
+        $(".modal-body").text("User must be logged in to add favorites!");
+
+        $('#myModal').modal('show');
+
+    };
 
 });
 
 $(document).on("click", "#favoriteNav", function() {
 
-    favoritesShowing = true;
+    if (userLoggedIn === true) {
 
     $('#favoritesBox').show();
     $('#favoritesBox').addClass("fadeInUp");
     $('#mainRandomResult').hide();
     $('#noResults').hide();
 
-    displayFavorites();
+        $('#favoritesBox').show();
+        $('#mainRandomResult').hide();
+        $('#noResults').hide();
+    
+        displayFavorites();
 
+    } else {
+
+        $(".modal-body").text("User must be logged in to view favorites!");
+
+        $('#myModal').modal('show');
+
+    };
 
 });
 
@@ -537,10 +522,10 @@ function displayFavorites(){
 
         event.preventDefault();            
 
-        console.log("seeing the display favorites function inside the function");
         $("#favoritesBox").empty();
     
     if (favoritesShowing == true) {
+
         for (var i = 0; i < favoritesLocal.length; i++) {
     
             var writeRestId = favoritesLocal[i].restID;
@@ -551,13 +536,13 @@ function displayFavorites(){
             var writeRestPrice = favoritesLocal[i].restPrice;
             var writeDataIndex = favoritesLocal[i].dataIndex;
     
-            var favoriteBoxDiv = $('<div class="card" style="width: 18rem;"><div class="card-header text-right"><span class="text-right"></span><i class="fas fa-star favorited" id="favorite" dataValue="'+writeRestId+'" dataIndex='+writeDataIndex+'></i></div><div class="card-body"><h5 class="card-title">'+writeRestName+'</h5><p class="card-text">'+writeRestAddress+'</p><p class="card-text">'+writeRestPrice+'</p></div><div class="card-footer"><small class="text-muted">'+writeRestCuisine+'</small></div></div>")');
+            var favoriteBoxDiv = $('<div class="card"><div class="card-header text-right"><span class="text-right"></span><i class="fas fa-star favorited" id="favorite" dataValue="'+writeRestId+'" dataIndex='+writeDataIndex+'></i></div><div class="card-body"><h5 class="card-title">'+writeRestName+'</h5><p class="card-text">'+writeRestAddress+'</p><p class="card-text">'+writeRestPrice+'</p></div><div class="card-footer"><small class="text-muted">'+writeRestCuisine+'</small></div></div>")');
     
             $("#favoritesBox").append(favoriteBoxDiv);
     
-        }
-    }
-}
+        };
+    };
+};
 
 
 
