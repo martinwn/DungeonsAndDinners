@@ -498,7 +498,7 @@ $(document).on("click", "#favoriteNav", function() {
     if (userLoggedIn === true) {
 
     $('#favoritesBox').show();
-    $('#favoritesBox').addClass("fadeInUp");
+    // $('#favoritesBox').addClass("fadeInUp");
     $('#mainRandomResult').hide();
     $('#noResults').hide();
 
