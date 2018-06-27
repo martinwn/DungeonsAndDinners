@@ -292,7 +292,9 @@ $("#findMeAPlace").on("click", function() {
 
                         $("#noResultsBox").text("No Results found for that Input!");
 
+                        $('#noResults').removeClass("fadeInUp");
                         $("#noResults").show();
+                        $('#noResults').addClass("fadeInUp");
 
                         console.log("No results!")
 
@@ -363,9 +365,11 @@ $("#findMeAPlace").on("click", function() {
 
                         if (threeRestaurantPicks.length === 1) {
 
+                            $("#noResults").removeClass("fadeInUp");
                             $("#noResultsBox").text("Only 1 Result For That Input!");
 
                             $("#noResults").show();
+                            $("#noResults").addClass("fadeInUp");
 
                         } else {
 
@@ -426,7 +430,9 @@ $("#findMeAPlace").on("click", function() {
                         };
                     };
 
+                    $('#mainRandomResult').removeClass("fadeInUp");
                     $('#mainRandomResult').show();
+                    $('#mainRandomResult').addClass("fadeInUp");
 
                 };
                 
@@ -518,6 +524,7 @@ $(document).on("click", "#favoriteNav", function() {
     favoritesShowing = true;
 
     $('#favoritesBox').show();
+    $('#favoritesBox').addClass("fadeInUp");
     $('#mainRandomResult').hide();
     $('#noResults').hide();
 
