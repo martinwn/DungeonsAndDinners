@@ -269,7 +269,6 @@ $("#findMeAPlace").on("click", function() {
 
                         $("#noResultsBox").text("No Results found for that Input!");
 
-                        $("#noResults").hide();
                         $('#noResults').removeClass("fadeInUp");
                         $("#noResults").show();
                         $('#noResults').addClass("fadeInUp");
@@ -406,7 +405,6 @@ $("#findMeAPlace").on("click", function() {
                         };
                     };
 
-                    $('#mainRandomResult').hide();
                     $('#mainRandomResult').removeClass("fadeInUp");
                     $('#mainRandomResult').show();
                     $('#mainRandomResult').addClass("fadeInUp");
