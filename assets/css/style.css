@@ -193,7 +193,7 @@ body {
 }
 
 #mainVenuePic {
-    max-width: 300px;
+    /* max-width: 300px; */
     /* min-width: 300px; */
     height: auto;
     min-height: 25px;
