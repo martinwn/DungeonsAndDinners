@@ -1,7 +1,14 @@
-# DungeonsAndDinners
-Team Members: William Martin, Andrew Babb, Garrett Berry.
+# Dungeons And Dinners
+A dining application that offers local food suggestions. Users can set parameters like distance and cuisine type to filter results. They can also sign in with third party authentication to save favorites.
 
-Description:
-On a high level, this project will give users suggestions of places to eat.
+## Demo
+![](DungeonsAndDinners.gif)
 
-The API's we will be using are Google Maps and Zomato to provide location and restaurant data. 
+## Built With
+* HTML/CSS/Javascript/JQuery
+* Ajax
+* Firebase
+* Google & Zomato API
+
+### Contributors
+William Martin, Andrew Babb, Garrett Berry.
